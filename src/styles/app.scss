@@ -1,0 +1,17 @@
+/**
+ *  @author Marcus Jackson
+ */
+
+@import "variables";
+@import "base/mixins";
+@import "framework/layout";
+
+@import "framework/global";
+@import "components/application";
+@import "components/sidebar";
+@import "components/buttons";
+@import "components/form";
+
+// FONTAWESOME
+$fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
+@import '../../node_modules/@fortawesome/fontawesome-pro/scss/fontawesome';

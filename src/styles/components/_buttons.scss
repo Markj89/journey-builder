@@ -1,0 +1,56 @@
+.btn {
+  z-index: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  color: $white !important;
+  @include box-sizing(border-box);
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  justify-content: center;
+}
+.remove {
+  background-color: $maropost_red !important;
+  border-color: $maropost_red;
+  @include hover-background(#73180E, $white);
+}
+
+.clear {
+  background-color: $filter_color !important;
+  border-color: $filter_color;
+  @include hover-background(#CC701F, $white);
+}
+
+.save {
+  background-color: $green !important;
+  border-color: $green;
+  @include hover-background(#1D8236, $white);
+}
+.btn_maropost {
+  display: inline-block;
+  border-radius: 40px;
+  text-align: center;
+  position: relative;
+  font-size: 16px;
+  line-height: 22px;
+  color: #fff;
+  font-family: "Open Sans",sans-serif;
+  background-color: #03B6FC;
+  font-weight: 700;
+  padding: 10px 30px;
+  -webkit-box-shadow: 0 3px 20px rgba(0,0,0,0.16);
+  box-shadow: 0 3px 20px rgba(0,0,0,0.16);
+  &:hover {
+    text-decoration: none;
+    color: #03B6FC;
+    background-color: #fff;
+    -webkit-box-shadow: 0 3px 20px rgba(0,0,0,0.16);
+    box-shadow: 0 3px 20px rgba(0,0,0,0.16);
+  }
+}

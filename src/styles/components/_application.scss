@@ -1,0 +1,182 @@
+#app {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.05) 98%, rgba(0, 0, 0, 0.1) 1%, rgba(255, 255, 255, 0.05)), linear-gradient(to left, rgba(255, 255, 255, 0.05) 98%, rgba(0, 0, 0, 0.1) 1%, rgba(255, 255, 255, 0.05));
+  background-size: 30px 30px;
+  position: relative;
+  width: 100%;
+  overflow: scroll;
+  .flowchart-container {
+    height: 0;
+  }
+}
+
+.dragme {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  margin-bottom: 20px;
+  z-index: 9;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  cursor: move;
+  .title {
+    font-size: 9px;
+    line-height: 0.9em;
+    color: #000;
+    text-align: center;
+    width: 100px;
+    position: relative;
+    left: -25px;
+    top: 15px;
+    font-size: .7rem;
+    font-weight: 400;
+    text-rendering: optimizeSpeed;
+  }
+  .icon { height: 55px; }
+  .highlight_item {
+    border: 1px solid orange;
+    -webkit-box-shadow: inset 0px 0px 2px 2px orange;
+    -moz-box-shadow: inset 0px 0px 2px 2px orange;
+    box-shadow: inset 0px 0px 2px 2px orange;
+  }
+  .invalid_item {
+    border: 1px solid red;
+    -webkit-box-shadow: inset 0px 0px 2px 2px red;
+    -moz-box-shadow: inset 0px 0px 2px 2px red;
+    box-shadow: inset 0px 0px 2px 2px red;
+  }
+  &.workflow_trigger {
+    background-image: linear-gradient(#27ae60, #219d55);
+  }
+  &.workflow_filter {
+    background-image: linear-gradient(#e67e22, #da751c);
+  }
+  &.workflow_action {
+    background-image: linear-gradient(#3498db, #2a8bcc);
+  }
+  &.workflow_delay {
+    background-image: linear-gradient(#34495e, #263849);
+  }
+  &.workflow_end {
+    background-image: linear-gradient(#c0392b, #b53224);
+  }
+}
+#side_panel_toggle {
+  width: 3em;
+  height: 3em;
+  position: absolute;
+  overflow: auto;
+  background: #eee;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  top: 0;
+  cursor: pointer;
+  left: 12em;
+  margin-top: 10px;
+}
+
+
+#workflow_buttons {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.workflow_popup {
+  .title {
+    background: #666;
+    padding: 5px 10px 5px 10px;
+    color: #fff;
+    display: block;
+    border-radius: 2px;
+  }
+  .tiny_text_box {
+    width: 30px;
+    padding: 3px;
+    line-height: 14px;
+  }
+}
+
+#workflow_title {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  color: #000;
+  font-size: 16px;
+  top: 10px;
+}
+
+.workflow_popup_table {
+  width: 100%;
+  .header {
+    td {
+      background: #ddd;
+    }
+  }
+  td {
+    padding: 5px;
+    background: #eee;
+  }
+}
+.flowchart-node {
+  min-width: 80px;
+  min-height: 80px;
+  padding: 15px;
+  @include box-sizing(border-box);
+  border: none;
+  opacity: .9;
+  color: $white;
+  svg {
+    cursor: grab;
+  }
+  .node-main {
+    color: black;
+  }
+  &.trigger,
+  &.action,
+  &.filter,
+  &.end,
+  &.delay {
+    color: $white;
+  }
+  &.trigger {
+    background-color: $triggers_color;
+    border-color: $triggers_color;
+  }
+  &.action {
+    background-color: $actions_color;
+    border-color: $actions_color;
+  }
+  &.filter {
+    background-color: $filter_color;
+    border-color:$filter_color;
+  }
+  &.end {
+    background-color: $end_color;
+    border-color: $end_color;
+  }
+  &.delay {
+    background-color: $delay_color;
+    border-color: $delay_color;
+  }
+}
+.node-port {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  transform: translate(-50%);
+  border: 1px solid #ccc;
+  border-radius: 100px;
+  background: white;
+  &:hover {
+    background: black;
+    border: 1px solid $white;
+  }
+}
+.node-input {
+  top: 38px;
+  left: 0px;
+}
+.node-output {
+  bottom: #{-2+-62/-2}px;
+  right: #{-2+18/-2}px;
+}

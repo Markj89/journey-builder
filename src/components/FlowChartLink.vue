@@ -1,6 +1,5 @@
 <template>
-  <g
-  @mouseover="handleMouseOver"
+  <g @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave">
     <path :d="dAttr" :style="pathStyle"></path>
     <a v-if="show.delete" @click="deleteLink">
@@ -12,23 +11,17 @@
 </template>
 
 <script>
+import EventBus from './../ux/eventBus';
 export default {
-  name: 'FlowchartLink',
-  components: {
-    FlowChartNode
-  },
+  name: 'FlowChartLink',
   props: {
     start: {
       type: Array,
-      default() {
-        return [0, 0]
-      }
+      required: false
     },
     end: {
       type: Array,
-      default() {
-        return [0, 0]
-      }
+      required: false
     },
     id: Number,
   },
@@ -56,7 +49,7 @@ export default {
     },
     caculateRotation() {
       // caculate arrow rotation
-      const angle = -Math.atan2(this.end[0] - this.start[0], this.end[1] - this.start[1]);
+      const angle = Math.atan2(this.end[0] - this.start[0], this.end[1] - this.start[1]);
       const degree = angle * 180 / Math.PI;
       return degree < 0 ? degree + 360 : degree;
     },
@@ -64,6 +57,7 @@ export default {
       this.$emit('deleteLink');
     }
   },
+  mounted() {},
   computed: {
     pathStyle() {
       return {
@@ -84,8 +78,7 @@ export default {
       const degree = this.caculateRotation()
       return `translate(${arrowX}, ${arrowY}) rotate(${degree})`;
     },
-    dAttr() {
-      console.log('Links', this);
+    dAttr: function() {
       let cx = this.start[0], cy = this.start[1], ex = this.end[0], ey = this.end[1];
       let x1 = cx, y1 = cy + 50, x2 = ex, y2 = ey - 50;
       return `M ${cx}, ${cy} C ${x1}, ${y1}, ${x2}, ${y2}, ${ex}, ${ey}`;

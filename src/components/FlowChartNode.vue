@@ -1,5 +1,5 @@
 <template>
-  <div class="flowchart-node dragme" ref="node" :style="nodeStyle" @dblclick.native="openModal(modal)" @mousedown="handleMousedown" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" v-bind:class="{selected: options.selected === id}">
+  <div class="flowchart-node dragme" ref="node" :style="nodeStyle" @mousedown="handleMousedown" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" v-on:dblclick="modalClick(modal)" v-bind:class="{selected: options.selected === id}">
     <div class="node-port node-input" @mousedown="inputMouseDown" @mouseup="inputMouseUp"></div>
     <div class="node-main">
       <div class="icon" v-bind:style="{ 'background-image': 'url(' + icon + ')' }"></div>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import FlowChartLink from '@/FlowChartLink.vue';
+import EventBus from './../ux/eventBus';
 
 export default {
   name: 'FlowChartNode',
@@ -80,6 +80,10 @@ export default {
     }
   },
   methods: {
+    modalClick(val) {
+      console.log('Double Clicked');
+      EventBus.$emit('openModal', val);
+    },
     handleMousedown(e) {
       const target = e.target || e.srcElement;
       if (target.className.indexOf('node-input') < 0 && target.className.indexOf('node-output') < 0) {
@@ -102,11 +106,7 @@ export default {
     },
     inputMouseUp(e) {
       this.$emit('linkingStop');
-      e.preventDefault();
-    },
-    openModal(id) {
-      //console.log('openModal', id);
-      this.$emit('nodeDblClick', id);
+      //e.preventDefault();
     },
   }
 }

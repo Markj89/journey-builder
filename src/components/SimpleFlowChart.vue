@@ -4,35 +4,49 @@
       <flowchart-link
       v-bind.sync="link"
       v-for="(link, index) in lines"
-      :key="`${index}`"
-      track-by="$index"
+      :key="`link${index}`"
       @deleteLink="linkDelete(link.id)">
       </flowchart-link>
     </svg>
 
+    <flowchart-modal
+    v-if="showModal"
+    v-for="(node, index) in diagram.nodes"
+    :key="`node${node.id}`"
+    v-bind.sync="node"
+    @openModal="showModal"
+    @closeModal="showModal = false">
+    </flowchart-modal>
+
     <flowchart-node
     v-bind.sync="node"
     v-for="(node, index) in diagram.nodes"
-    :key="`node${index}`"
-    :ref="`node${index}`"
+    :key="`node${node.id}` + 1"
+    :ref="`node${node.id}`"
     v-bind:class="`workflow_${node.type}`"
     :options="nodeOptions"
     @linkingStart="linkingStart(node.id)"
     @linkingStop="linkingStop(node.id)"
     @nodeSelected="nodeSelected(node.id, $event)">
+    <slot :node="node"></slot>
     </flowchart-node>
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
-
-import FlowChartLink from '@/FlowChartLink.vue';
-import FlowChartNode from '@/FlowChartNode.vue';
-import { getMousePosition } from '@/position.js';
+import FlowChartLink from './FlowChartLink.vue';
+import FlowChartNode from './FlowChartNode.vue';
+import { getMousePosition } from './../ux/position';
+import FlowChartModal from './FlowChartModal.vue';
+import EventBus from './../ux/eventBus';
 
 export default {
   name: 'VueFlowchart',
+  components: {
+    'flowchart-link': FlowChartLink,
+    'flowchart-node': FlowChartNode,
+    'flowchart-modal': FlowChartModal,
+  },
   props: {
     diagram: {
       type: Object,
@@ -53,6 +67,10 @@ export default {
   },
   data() {
     return {
+      showModal: false,
+      delay: 700,
+      clicks: 0,
+      timer: null,
       action: {
         linking: false,
         dragging: false,
@@ -72,10 +90,6 @@ export default {
       },
       lines: [],
     };
-  },
-  components: {
-    'flowchart-link': FlowChartLink,
-    'flowchart-node': FlowChartNode
   },
   computed: {
     nodeOptions() {
@@ -100,25 +114,31 @@ export default {
    draggingLink: {
      handler: 'setLines',
      deep: true,
+     immediate: true,
    },
+   showModal: {
+     handler() {
+       this.$nextTick(this.openModal);
+     }
+   }
  },
   mounted() {
     this.rootDivOffset.top = this.$el ? this.$el.offsetTop : 0;
     this.rootDivOffset.left = this.$el ? this.$el.offsetLeft : 0;
   },
+  created() {
+    EventBus.$on('openModal', (data) => {
+      console.log(this);
+      return this.showModal = true;
+    });
+  },
   methods: {
-    nodeDblClick(id) {
-      for (let prop in this.$refs) {
-        if (id === this.$refs[prop]) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-      console.log('node double click', id);
+    closeModal() {
+      console.log('Closed!');
+      this.showModal = false;
     },
     setLines() {
-      const lines = this.diagram.links.map((link) => {
+      const lines = this.diagram.links.map(link => {
         if (typeof x === "undefined") {
           return false;
         }
@@ -129,11 +149,11 @@ export default {
         let x, y, cy, cx, ex, ey;
         x = this.diagram.centerX + fromNode['x'];
         y = this.diagram.centerY + fromNode.y;
-        [cx, cy] = this.getPortPosition('bottom', parseFloat(x), parseFloat(y));
+        [cx, cy] = this.getPortPosition('bottom', x, y);
 
         x = this.diagram.centerX + toNode['x'];
         y = this.diagram.centerY + toNode.y;
-        [ex, ey] = this.getPortPosition('top',  parseFloat(x), parseFloat(y));
+        [ex, ey] = this.getPortPosition('top',  x, y);
 
         return {
           start: [cx, cy],
@@ -142,24 +162,25 @@ export default {
         };
       });
 
-      if (this.draggingLink) {
+      if (this.draggingLink && (this.draggingLink.mx || this.draggingLink.my)) {
         let x, y, cy, cx;
         const fromNode = this.findNodeWithID(this.draggingLink.from);
         x = this.diagram.centerX + fromNode.x;
         y = this.diagram.centerY + fromNode.y;
-        [cx, cy] = this.getPortPosition('bottom', parseFloat(x), parseFloat(y));
+        [cx, cy] = this.getPortPosition('bottom', x, y);
 
         lines.push({
           start: [cx, cy],
           end: [this.draggingLink.mx, this.draggingLink.my],
         });
-
       }
-      lines.forEach((line, index) => {
-        Vue.set(this.lines, index, line);
-      });
+      /*lines.forEach((line, index) => {
+        this.$set(this.lines, index, line);
+      });*/
       //this.lines.push(lines);
-      console.log('Lines', this.lines);
+      //this.$set(this.lines, lines);
+      this.lines = lines;
+      EventBus.$emit('dAttr', this.lines);
     },
     findNodeWithID(id) {
       return this.diagram.nodes.find((item) => {
@@ -183,7 +204,7 @@ export default {
     },
     linkingStop(index) {
       if (this.draggingLink && this.draggingLink.from !== index) {   // Add new Link
-        const existed = this.diagram.links.find((link) => {   // Check link existence
+        const existed = this.diagram.links.find(link => {   // Check link existence
           return link.from === this.draggingLink.from && link.to === index;
         });
 
@@ -198,6 +219,7 @@ export default {
             to: index,
           };
           this.diagram.links.push(newLink);
+          //EventBus.$emit('dAttr', this.diagram.links);
           this.$emit('linkAdded', newLink);
         }
       }
@@ -227,6 +249,10 @@ export default {
       if (this.action.linking) {
         [this.mouse.x, this.mouse.y] = getMousePosition(this.$el, e);
         [this.draggingLink.mx, this.draggingLink.my] = [this.mouse.x, this.mouse.y];
+
+        if (typeof [this.draggingLink.mx, this.draggingLink.my] === 'undefined') {
+          return false;
+        }
       }
       if (this.action.dragging) {
         this.mouse.x = e.pageX || e.clientX + document.documentElement.scrollLeft;
@@ -257,6 +283,7 @@ export default {
       const target = e.target || e.srcElement;
       if (this.$el.contains(target)) {
         if (typeof target.className !== 'string' || target.className.indexOf('node-input') < 0) {
+          //console.log(this.draggingLink)
           this.draggingLink = null;
         }
         if (typeof target.className === 'string' && target.className.indexOf('node-delete') > -1) {
@@ -278,27 +305,29 @@ export default {
       this.$emit('canvasClick', e);
     },
     moveSelectedNode(dx, dy) {
-      let index = this.diagram.nodes.findIndex((item) => {
+      let index = this.diagram.nodes.findIndex(item => {
         return item.id === this.action.dragging;
       });
+
       let left = this.diagram.nodes[index].x + dx / this.diagram.scale;
       let top = this.diagram.nodes[index].y + dy / this.diagram.scale;
+
       this.$set(this.diagram.nodes, index, Object.assign(this.diagram.nodes[index], {
         x: left,
         y: top,
       }));
     },
     nodeDelete(id) {
-      this.diagram.nodes = this.diagram.nodes.filter((node) => {
+      this.diagram.nodes = this.diagram.nodes.filter(node => {
         return node.id !== id;
       });
-      this.diagram.links = this.diagram.links.filter((link) => {
+      this.diagram.links = this.diagram.links.filter(link => {
         return link.from !== id && link.to !== id;
       });
       this.$emit('nodeDelete', id);
     }
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

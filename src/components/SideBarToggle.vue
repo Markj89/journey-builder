@@ -33,3 +33,9 @@
     name: 'SideBarToggle'
   }
 </script>
+
+<style>
+.sidebarToggle {
+  background-image: url('../assets/sidebarToggleBackground.png');
+}
+</style>

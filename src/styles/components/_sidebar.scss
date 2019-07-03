@@ -1,0 +1,152 @@
+#side_panel {
+  width: 10%;
+  position: absolute;
+  overflow: auto;
+  background-color: $maropost_grey;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: move;
+  z-index: 99999;
+  &.disable_sidebar {
+    opacity: .5;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.05) 98%, rgba(0, 0, 0, 0.1) 1%, rgba(255, 255, 255, 0.05)), linear-gradient(to left, rgba(255, 255, 255, 0.05) 98%, rgba(0, 0, 0, 0.1) 1%, rgba(255, 255, 255, 0.05));
+  }
+  .workflow_menu_block {
+    width: 100%;
+    padding-top: 8px;
+    .workflow_menu_row {
+      label {
+        -webkit-box-shadow: inset 0px 0px 2px 0px #ccc;
+        -moz-box-shadow: inset 0px 0px 2px 0px #ccc;
+        box-shadow: inset 0px 0px 2px 0px #ccc;
+        display: block;
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 0px;
+        margin: 0px;
+        line-height: 14px;
+        color: $white;
+      }
+      ul {
+        list-style: none;
+        margin: 0px;
+        padding: 3px;
+        .sidebar-modal {
+          position: relative;
+          vertical-align: top;
+          width: 100%;
+          height: auto;
+          padding: 5px 5px;
+          font-size: 1rem;
+          font-weight: 500;
+          text-align: center;
+          cursor: pointer;
+          &.trigger {
+            color: $white;
+            background-color: $triggers_color;
+            border-color: $triggers_color;
+            @include hover-background(#219d55, $white);
+            -webkit-box-shadow: inset 0 -2px #219d55;
+            -moz-box-shadow: inset 0 -2px #219d55;
+            box-shadow: inset 0 -2px #219d55;
+          }
+          &.filter {
+            background-color: $filter_color;
+            border-color:$filter_color;
+            @include hover-background(#CC701F, $white);
+            -webkit-box-shadow: inset 0 -2px $filter_color;
+            -moz-box-shadow: inset 0 -2px $filter_color;
+            box-shadow: inset 0 -2px $filter_color;
+          }
+          &.end {
+            background-color: $end_color;
+            border-color: $end_color;
+            -webkit-box-shadow: inset 0 -2px $end_color;
+            -moz-box-shadow: inset 0 -2px $end_color;
+            box-shadow: inset 0 -2px $end_color;
+          }
+          &.delay {
+            background-color: $delay_color;
+            border-color: $delay_color;
+            -webkit-box-shadow: inset 0 -2px $delay_color;
+            -moz-box-shadow: inset 0 -2px $delay_color;
+            box-shadow: inset 0 -2px $delay_color;
+          }
+          &.action {
+            background-color: $actions_color;
+            border-color: $actions_color;
+            -webkit-box-shadow: inset 0 -2px $actions_color;
+            -moz-box-shadow: inset 0 -2px $actions_color;
+            box-shadow: inset 0 -2px $actions_color;
+          }
+          list-style: none;
+          margin: 0px;
+          padding: 0px;
+          a {
+            padding: 4px 0 4px 0;
+            font-size: 12px;
+            display: block;
+            height: auto;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 2px;
+            border-radius: 2px;
+            &:hover {
+              color: #fff;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sidebarToggle {
+  width: 30%;
+  max-width: 595px;
+  top: 0;
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  overflow: scroll;
+  float: right;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
+  box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
+  right: 0;
+  -webkit-transition: all .25s ease;
+  transition: all .25s ease;
+  z-index: 40000;
+  .sidebar-nav {
+    .bd-content {
+      padding: 50px 50px;
+    }
+    .sidebarHighlight {
+      background-color: $blue-light;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      padding: 20px 20px;
+      overflow: auto;
+    }
+  }
+}
+.sidebar-background {
+  background: rgba(0,0,0,.2);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 20000;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  opacity: 1;
+}
+.sidebar-modal-link {
+  text-decoration: none;
+}
