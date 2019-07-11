@@ -4,9 +4,9 @@
     <path :d="dAttr" :style="pathStyle"></path>
     <a v-if="show.delete" @click="deleteLink">
     </a>
-    <path v-else d="M -1 -1 L 0 1 L 1 -1 z"
+    <!--<path v-else d="M -1 -1 L 0 1 L 1 -1 z"
       :style="arrowStyle"
-      :transform="arrowTransform"></path>
+      :transform="arrowTransform"></path>-->
   </g>
 </template>
 
@@ -31,6 +31,11 @@ export default {
         delete: false,
       }
     }
+  },
+  created() {
+    EventBus.$on('dAttr', (lines) => {
+      console.log(lines);
+    });
   },
   methods: {
     handleMouseOver() {
@@ -66,7 +71,7 @@ export default {
         fill: 'none',
       }
     },
-    arrowStyle() {
+    /*arrowStyle() {
       return {
         stroke: 'rgb(2, 2, 2)',
         strokeWidth: 5.73205,
@@ -77,7 +82,7 @@ export default {
       const [arrowX, arrowY] = this.caculateCenterPoint();
       const degree = this.caculateRotation()
       return `translate(${arrowX}, ${arrowY}) rotate(${degree})`;
-    },
+    },*/
     dAttr: function() {
       let cx = this.start[0], cy = this.start[1], ex = this.end[0], ey = this.end[1];
       let x1 = cx, y1 = cy + 50, x2 = ex, y2 = ey - 50;

@@ -1,11 +1,11 @@
 <template>
-  <div class="flowchart-node dragme" ref="node" :style="nodeStyle" @mousedown="handleMousedown" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" v-on:dblclick="modalClick(modal)" v-bind:class="{selected: options.selected === id}">
-    <div class="node-port node-input" @mousedown="inputMouseDown" @mouseup="inputMouseUp"></div>
+  <div class="flowchart-node dragme" :ref="`${type}`" :style="nodeStyle" @mousedown="handleMousedown" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" v-on:dblclick="modalClick(modal)" v-bind:class="{selected: options.selected === id}">
+    <div class="node-port node-input" @mousedown="inputMouseDown" @mouseup="inputMouseUp" v-if="`${type}` === 'filter' || `${type}` === 'action' || `${type}` === 'delay' || `${type}` === 'end'"></div>
     <div class="node-main">
       <div class="icon" v-bind:style="{ 'background-image': 'url(' + icon + ')' }"></div>
       <h1 v-text="label" class="title node-label"></h1>
     </div>
-    <div class="node-port node-output" @mousedown="outputMouseDown"></div>
+    <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay'"></div>
     <div v-show="show.delete" class="node-delete">&times;</div>
   </div>
 </template>

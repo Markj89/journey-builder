@@ -17,7 +17,7 @@
               </transition-group>
             </div>
             <div class="modal-footer modal_buttons">
-              <a @click="prev" href='#'>Previous</a> || <a @click="next" href='#'>Next</a>
+              <a @click="prev" v-if="currentNumber !== 0" href='#'>Previous</a> || <a @click="next" v-if="currentNumber !== 2" href='#'>Next</a>
             </div>
             <div class="modal-footer modal_buttons" name="fade">
               <button class="btn_maropost" v-if="currentNumber === 2" v-on:click.stop="close" aria-label="Close">Lets Do This...</button>

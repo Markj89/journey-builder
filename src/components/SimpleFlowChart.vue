@@ -153,7 +153,7 @@ export default {
 
         x = this.diagram.centerX + toNode['x'];
         y = this.diagram.centerY + toNode.y;
-        [ex, ey] = this.getPortPosition('top',  x, y);
+        [ex, ey] = this.getPortPosition('top', x, y);
 
         return {
           start: [cx, cy],
@@ -174,12 +174,9 @@ export default {
           end: [this.draggingLink.mx, this.draggingLink.my],
         });
       }
-      /*lines.forEach((line, index) => {
-        this.$set(this.lines, index, line);
-      });*/
-      //this.lines.push(lines);
-      //this.$set(this.lines, lines);
       this.lines = lines;
+      this.lines.$set(lines);
+      console.log('from setlines', this);
       EventBus.$emit('dAttr', this.lines);
     },
     findNodeWithID(id) {
@@ -283,7 +280,6 @@ export default {
       const target = e.target || e.srcElement;
       if (this.$el.contains(target)) {
         if (typeof target.className !== 'string' || target.className.indexOf('node-input') < 0) {
-          //console.log(this.draggingLink)
           this.draggingLink = null;
         }
         if (typeof target.className === 'string' && target.className.indexOf('node-delete') > -1) {

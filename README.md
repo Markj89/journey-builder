@@ -5,7 +5,7 @@ A demo version of the Maropost Journey Builder for the sales team to present in 
  - Open Node to Modal
  - Delete Link
 
-![Screenshot](https://maroposttrial-my.sharepoint.com/personal/marcus_maropost_com/Documents/Dev/Screen%20Shot%202019-06-26%20at%207.59.40%20AM.png)
+![Screenshot](https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png)
 
 ## Prerequisites
 - [Vue Dev Tools](https://github.com/vuejs/vue-devtools)

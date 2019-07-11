@@ -86,9 +86,7 @@ export default {
       }
     };
   },
-  mounted() {
-    //this.tutorial();
-  },
+  mounted() {},
   computed: {},
   methods: {
     addNode(nodes) {
