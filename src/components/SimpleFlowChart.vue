@@ -70,7 +70,6 @@ export default {
       showModal: false,
       delay: 700,
       clicks: 0,
-      timer: null,
       action: {
         linking: false,
         dragging: false,
@@ -175,7 +174,7 @@ export default {
         });
       }
       this.lines = lines;
-      this.lines.$set(lines);
+      //this.lines.$set(lines);
       console.log('from setlines', this);
       EventBus.$emit('dAttr', this.lines);
     },

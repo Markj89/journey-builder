@@ -3,7 +3,11 @@
     <tutorial v-if="showTutorialModal" @closeTutorialModal="showTutorialModal = false"></tutorial>
     <simple-flowchart :diagram.sync="diagram" @nodeClick="nodeClick" @nodeDelete="nodeDelete" @linkBreak="linkBreak" @linkAdded="linkAdded" @canvasClick="canvasClick" :height="100" />
     <sidebar-toggle v-if="JourneyEnd"></sidebar-toggle>
-
+    <!--<div id="timer">
+      <span id="minutes">{{ minutes }}</span>
+      <span id="middle">:</span>
+      <span id="seconds">{{ seconds }}</span>
+    </div>-->
     <aside id="side_panel" class="sidebar draggable" v-bind:class="{'disable_sidebar disabled': JourneyEnd === true }">
       <div class="workflow_menu_block">
         <div class="workflow_menu_row">
@@ -18,7 +22,6 @@
 
     <div class="bottom right">
       <button class="btn save" @click="JourneyEnd = !JourneyEnd">Save</button>
-      <button class="btn clear" @click="ClearCanvas">Clear</button>
     </div>
   </div>
 </template>
@@ -42,6 +45,9 @@ export default {
     return {
       JourneyEnd: false,
       showTutorialModal: true,
+      timer: null,
+      totalTime: 60,
+      alert: "Time is up!",
       diagram: {
         centerX: 1024,
         centerY: 140,
@@ -86,9 +92,35 @@ export default {
       }
     };
   },
-  mounted() {},
-  computed: {},
+  mounted() {
+    this.startTimer();
+  },
+  computed: {
+    minutes: function() {
+      const minutes = Math.floor(this.totalTime / 60);
+      return this.padTime(minutes);
+    },
+    seconds: function() {
+      const seconds = this.totalTime - (this.minutes * 60);
+      return this.padTime(seconds);
+    }
+  },
   methods: {
+    startTimer() {
+      this.timer = setInterval(() => this.countdown(), 1000);
+    },
+    padTime: function(time) {
+      return (time < 10 ? '0' : '') + time;
+    },
+    countdown() {
+      if (this.showTutorialModal === false) {
+        this.totalTime--;
+      }
+      if (this.totalTime === 0) {
+        this.JourneyEnd = true;
+        console.log(this.alert);
+      }
+    },
     addNode(nodes) {
       this.diagram.nodes.push({
         id: this.diagram.nodes.length + 1,
@@ -104,10 +136,6 @@ export default {
     closeTutorialModal() {
       this.showTutorialModal = !this.showTutorialModal;
     },
-    ClearCanvas(id) {
-      console.log('Clear Canvas', id);
-    },
-
     nodeClick(id) {
       console.log('node click', id);
     },
