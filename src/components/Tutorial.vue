@@ -1,13 +1,13 @@
 <template>
-  <div class="modal-mask">
-    <div class="modal-tutorial" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title">Welcome to our Journey Builder Demo!</h1>
+  <div class="vue-modal-mask">
+    <div class="vue-modal-tutorial" tabindex="-1" role="dialog">
+      <div class="vue-modal-dialog">
+        <div class="vue-modal-content">
+          <div class="vue-modal-header">
+            <h1 class="vue-modal-title">Welcome to our Journey Builder Demo!</h1>
           </div>
-          <div class="modal-body">
-            <p class="modal-paragraph">Pick your industry and watch a quick video on how to get started.</p>
+          <div class="vue-modal-body">
+            <p class="vue-modal-paragraph">Pick your industry and watch a quick video on how to get started.</p>
             <div class="image-slider" tag="div">
               <transition-group name="fade" tag="div">
                 <div v-for="number in [currentNumber]" :key="number">
@@ -16,10 +16,10 @@
                 </div>
               </transition-group>
             </div>
-            <div class="modal-footer modal_buttons">
+            <div class="vue-modal-footer modal_buttons">
               <a @click="prev" v-if="currentNumber !== 0" href='#'>Previous</a> || <a @click="next" v-if="currentNumber !== 2" href='#'>Next</a>
             </div>
-            <div class="modal-footer modal_buttons" name="fade">
+            <div class="vue-modal-footer modal_buttons" name="fade">
               <button class="btn_maropost" v-if="currentNumber === 2" v-on:click.stop="close" aria-label="Close">Lets Do This...</button>
             </div>
           </div>
@@ -66,7 +66,6 @@ export default {
       this.currentNumber -= 1
     },
     close() {
-      console.log(this);
       this.$emit('closeTutorialModal');
       this._isDestroyed = true;
     }
@@ -81,19 +80,7 @@ export default {
 
 <style scoped lang="scss">
   $maropost_blue: #0171ac;
-
-  .modal-mask {
-    background-color: rgba(0, 0, 0, .5);
-    display: table;
-    transition: opacity .3s ease;
-    z-index: 105000000;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .modal-tutorial {
+  .vue-modal-tutorial {
   	background-color: #fff;
     width: 700px;
     border-radius: 2px;
@@ -110,29 +97,21 @@ export default {
   	overflow: visible;
     vertical-align: middle;
     box-sizing: border-box;
-    .modal-title {
+    .vue-modal-title {
       font-size: 1.9rem;
     }
-    .modal-dialog {
+    .vue-modal-dialog {
       margin: 0 auto;
       font-family: Helvetica, Arial, sans-serif;
-      .modal-body {
+      .vue-modal-body {
         margin: 20px 0;
         .image-slider {
           height: 400px;
           position: relative;
         }
-        .modal-paragraph {
+        .vue-modal-paragraph {
           margin: 1rem 0;
         }
-      }
-      a {
-        cursor: pointer;
-        text-decoration: none;
-        color: $maropost_blue;
-        letter-spacing: 1;
-        line-height: 20px;
-        font-weight: 500;
       }
       img {
         position: relative;

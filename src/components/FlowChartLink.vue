@@ -1,9 +1,14 @@
 <template>
   <g @mouseover="handleMouseOver"
     @mouseleave="handleMouseLeave">
-    <path :d="dAttr" :style="pathStyle"></path>
+    <path :d="dAttr" :style="pathStyle" marker-end="url(#triangle)"></path>
     <a v-if="show.delete" @click="deleteLink">
+      <text
+        text-anchor="middle"
+        :transform="arrowTransform"
+        font-size="22">&times;</text>
     </a>
+    <!--<path d="M 20, -130 L 15, -140 L 10 -130 z" :style="arrowStyle" :transform="arrowTransform"></path>-->
     <!--<path v-else d="M -1 -1 L 0 1 L 1 -1 z"
       :style="arrowStyle"
       :transform="arrowTransform"></path>-->
@@ -30,12 +35,11 @@ export default {
       show: {
         delete: false,
       }
-    }
+    };
   },
   created() {
     EventBus.$on('dAttr', (lines) => {
-      console.log(lines);
-    });
+  });
   },
   methods: {
     handleMouseOver() {
@@ -62,7 +66,11 @@ export default {
       this.$emit('deleteLink');
     }
   },
-  mounted() {},
+  mounted() {
+    if (this.start[1] < this.end[1]) {
+      console.log('Must be curved');
+    }
+  },
   computed: {
     pathStyle() {
       return {
@@ -71,21 +79,29 @@ export default {
         fill: 'none',
       }
     },
-    /*arrowStyle() {
+    arrowStyle() {
       return {
         stroke: 'rgb(2, 2, 2)',
-        strokeWidth: 5.73205,
-        fill: 'none',
+        strokeWidth: 2.73205,
+        fill: 'rgb(2, 2, 2)',
       }
     },
     arrowTransform() {
       const [arrowX, arrowY] = this.caculateCenterPoint();
-      const degree = this.caculateRotation()
+      const degree = this.caculateRotation();
       return `translate(${arrowX}, ${arrowY}) rotate(${degree})`;
-    },*/
+    },
     dAttr: function() {
       let cx = this.start[0], cy = this.start[1], ex = this.end[0], ey = this.end[1];
-      let x1 = cx, y1 = cy + 50, x2 = ex, y2 = ey - 50;
+      let x1, y1, x2, y2;
+
+      /*if (this.start[0] >= this.end[0]) {
+        xl = cx, y1 = cy + 50, x2 = ex, y2 = ey - 50;
+      } else {
+        x1 = cx, y1 = cy, x2 = ex, y2 = ey;
+      }*/
+      //let x1 = cx, y1 = cy + 50, x2 = ex, y2 = ey - 50;
+      x1 = cx, y1 = cy, x2 = ex, y2 = ey;
       return `M ${cx}, ${cy} C ${x1}, ${y1}, ${x2}, ${y2}, ${ex}, ${ey}`;
     }
   }
@@ -95,5 +111,10 @@ export default {
 <style scoped lang="scss">
 g {
   cursor: pointer;
+  marker#triangle {
+    fill: rgb(2, 2, 2);
+    stroke: rgb(2, 2, 2);
+    stroke-width: 2;
+  }
 }
 </style>

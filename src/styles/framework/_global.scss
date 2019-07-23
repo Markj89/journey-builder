@@ -88,7 +88,14 @@ p {
 }
 
 // LINKS
-a { cursor: pointer; }
+a {
+	cursor: pointer;
+	text-decoration: none;
+	color: $maropost_blue;
+	letter-spacing: 1;
+	line-height: 20px;
+	font-weight: 500;
+}
 
 // IMAGES
 img { max-width: 100%; }

@@ -8,9 +8,17 @@
 
 @import "framework/global";
 @import "components/application";
+@import "components/modal";
 @import "components/sidebar";
 @import "components/buttons";
 @import "components/form";
+
+// BOOTSTRAP
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap-vue/src/index.scss';
+
+// AUTOCOMPLETE
+@import '../../node_modules/v-autocomplete/dist/v-autocomplete';
 
 // FONTAWESOME
 $fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';

@@ -1,36 +1,17 @@
 <template>
-  <div class="flowchart-container" @mousemove="handleMove" @mouseup="handleUp" @mousedown="handleDown">
-    <svg width="100%" :height="`${height}vh`" xmlns="http://www.w3.org/2000/svg">
-      <flowchart-link
-      v-bind.sync="link"
-      v-for="(link, index) in lines"
-      :key="`link${index}`"
-      @deleteLink="linkDelete(link.id)">
-      </flowchart-link>
-    </svg>
+<div class="flowchart-container" @mousemove="handleMove" @mouseup="handleUp" @mousedown="handleDown">
+  <svg width="100%" :height="`${height}vh`" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <flowchart-link v-bind.sync="link" v-for="(link, index) in lines" :key="`link${index}`" @deleteLink="linkDelete(link.id)">
+    </flowchart-link>
+  </svg>
 
-    <flowchart-modal
-    v-if="showModal"
-    v-for="(node, index) in diagram.nodes"
-    :key="`node${node.id}`"
-    v-bind.sync="node"
-    @openModal="showModal"
-    @closeModal="showModal = false">
-    </flowchart-modal>
-
-    <flowchart-node
-    v-bind.sync="node"
-    v-for="(node, index) in diagram.nodes"
-    :key="`node${node.id}` + 1"
-    :ref="`node${node.id}`"
-    v-bind:class="`workflow_${node.type}`"
-    :options="nodeOptions"
-    @linkingStart="linkingStart(node.id)"
-    @linkingStop="linkingStop(node.id)"
-    @nodeSelected="nodeSelected(node.id, $event)">
+  <flowchart-modal v-if="showModal && modal === `${node.modal}`" v-for="(node, index) in diagram.nodes" :key="`node${node.id}`" v-bind.sync="node" @openModal="showModal" @closeModal="showModal = false">
+  </flowchart-modal>
+  <flowchart-node v-bind.sync="node" v-for="(node, index) in diagram.nodes" :key="`node${node.id}` + 1" :ref="`node${node.id}`" v-bind:class="`workflow_${node.type}`" :options="nodeOptions" @linkingStart="linkingStart(node.id)"
+    @linkingStop="linkingStop(node.id)" @nodeSelected="nodeSelected(node.id, $event)">
     <slot :node="node"></slot>
-    </flowchart-node>
-  </div>
+  </flowchart-node>
+</div>
 </template>
 
 <script>
@@ -50,7 +31,7 @@ export default {
   props: {
     diagram: {
       type: Object,
-      default() {
+      default () {
         return {
           centerX: 1024,
           scale: 1,
@@ -69,6 +50,7 @@ export default {
     return {
       showModal: false,
       delay: 700,
+      modal: '',
       clicks: 0,
       action: {
         linking: false,
@@ -103,45 +85,41 @@ export default {
     },
   },
   watch: {
-   diagram: {
-     handler() {
-       this.$nextTick(this.setLines);
-     },
-     deep: true,
-     immediate: true,
-   },
-   draggingLink: {
-     handler: 'setLines',
-     deep: true,
-     immediate: true,
-   },
-   showModal: {
-     handler() {
-       this.$nextTick(this.openModal);
-     }
-   }
- },
+    diagram: {
+      handler() {
+        this.$nextTick(this.setLines);
+      },
+      deep: true,
+      immediate: true,
+    },
+    draggingLink: {
+      handler: 'setLines',
+      deep: true,
+      //immediate: true,
+    },
+    showModal: {
+      handler() {
+        this.$nextTick(this.openModal);
+      }
+    }
+  },
   mounted() {
     this.rootDivOffset.top = this.$el ? this.$el.offsetTop : 0;
     this.rootDivOffset.left = this.$el ? this.$el.offsetLeft : 0;
   },
   created() {
     EventBus.$on('openModal', (data) => {
-      console.log(this);
+      this.modal = data;
       return this.showModal = true;
     });
   },
   methods: {
+    openModal(data) {},
     closeModal() {
-      console.log('Closed!');
       this.showModal = false;
     },
     setLines() {
       const lines = this.diagram.links.map(link => {
-        if (typeof x === "undefined") {
-          return false;
-        }
-
         const fromNode = this.findNodeWithID(link.from);
         const toNode = this.findNodeWithID(link.to);
 
@@ -159,7 +137,7 @@ export default {
           end: [ex, ey],
           id: link.id,
         };
-      });
+      })
 
       if (this.draggingLink && (this.draggingLink.mx || this.draggingLink.my)) {
         let x, y, cy, cx;
@@ -167,6 +145,7 @@ export default {
         x = this.diagram.centerX + fromNode.x;
         y = this.diagram.centerY + fromNode.y;
         [cx, cy] = this.getPortPosition('bottom', x, y);
+        // push temp dragging link, mouse cursor postion = link end postion
 
         lines.push({
           start: [cx, cy],
@@ -174,9 +153,7 @@ export default {
         });
       }
       this.lines = lines;
-      //this.lines.$set(lines);
-      console.log('from setlines', this);
-      EventBus.$emit('dAttr', this.lines);
+      EventBus.$emit('dAttr', lines);
     },
     findNodeWithID(id) {
       return this.diagram.nodes.find((item) => {
@@ -185,7 +162,7 @@ export default {
     },
     getPortPosition(type, x, y) {
       if (type === 'top') {
-        return [x + 40, y];
+        return [x + 20 / 4, y + 45];
       } else if (type === 'bottom') {
         return [x + 140 * 0.5, y + 40];
       }
@@ -199,8 +176,8 @@ export default {
       };
     },
     linkingStop(index) {
-      if (this.draggingLink && this.draggingLink.from !== index) {   // Add new Link
-        const existed = this.diagram.links.find(link => {   // Check link existence
+      if (this.draggingLink && this.draggingLink.from !== index) { // Add new Link
+        const existed = this.diagram.links.find(link => { // Check link existence
           return link.from === this.draggingLink.from && link.to === index;
         });
 
@@ -215,7 +192,6 @@ export default {
             to: index,
           };
           this.diagram.links.push(newLink);
-          //EventBus.$emit('dAttr', this.diagram.links);
           this.$emit('linkAdded', newLink);
         }
       }
@@ -288,7 +264,6 @@ export default {
       this.action.linking = false;
       this.action.dragging = null;
       this.action.scrolling = false;
-      //e.preventDefault();
     },
     handleDown(e) {
       const target = e.target || e.srcElement;
@@ -327,11 +302,12 @@ export default {
 
 <style scoped lang="scss">
 .flowchart-container {
-  margin: 0;
-  background: #ddd;
-  position: relative;
-  svg {
-    cursor: grab;
-  }
+    margin: 0;
+    background: #ddd;
+    position: relative;
+    //overflow: hidden;
+    svg {
+        cursor: grab;
+    }
 }
 </style>
