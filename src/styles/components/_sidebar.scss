@@ -124,8 +124,10 @@
   transition: all .25s ease;
   z-index: 40000;
   .sidebar-nav {
+    text-align: left;
     .bd-content {
       padding: 50px 50px;
+      text-align: left;
     }
     .sidebarHighlight {
       background-color: $blue-light;
