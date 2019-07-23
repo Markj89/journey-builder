@@ -31,6 +31,41 @@ import Tutorial from './components/Tutorial.vue';
 
 export default {
   name: 'app',
+  metaInfo: {
+    title: 'Journey Builder by Maropost',
+    titleTemplate: '%s',
+    htmlAttrs: {
+      lang: 'en',
+      amp: true
+    },
+    meta: [
+      {'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {name: 'description', content: 'The Demo version of Maropost Journey Builder'},
+      {property: 'og:title', content: 'Journey Builder by Maropost'},
+      {property: 'og:site_name', content: 'Journey Builder by Maropost'},
+      {property: 'og:type', content: 'website'},
+      // Should the the same as your canonical link, see below.
+      {property: 'og:url', content: 'http://journeybuilder.maropost.com/'},
+      {property: 'og:image', content: 'https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png'},
+      // Often the same as your meta description, but not always.
+      {property: 'og:description', content: 'The Demo version of Maropost Journey Builder'},
+
+      // Twitter card
+      {name: 'twitter:card', content: 'summary'},
+      {name: 'twitter:site', content: 'http://journeybuilder.maropost.com/'},
+      {name: 'twitter:title', content: 'Journey Builder by Maropost'},
+      {name: 'twitter:description', content: 'The Demo version of Maropost Journey Builder'},
+      // Your twitter handle, if you have one.
+      {name: 'twitter:creator', content: '@Maropost'},
+      {name: 'twitter:image:src', content: 'https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png'},
+
+      // Google / Schema.org markup:
+      {itemprop: 'name', content: 'Journey Builder by Maropost'},
+      {itemprop: 'description', content: 'The Demo version of Maropost Journey Builder'},
+      {itemprop: 'image', content: 'https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png'}
+    ]
+  },
   components: {
     'simple-flowchart': SimpleFlowchart,
     'end-game': EndGame,
