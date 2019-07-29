@@ -25,3 +25,4 @@ yarn-error.log*
 # Unused files & Folders
 /src/APIService.js
 /src/app.js
+/src/components/DoubleFlowChartLink.vue

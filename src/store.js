@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+//import content from '../public/content.json';
 
 Vue.use(Vuex, axios)
-const API_URL = window.URL.href  ? 'http://journeybuilder.maropost.com/' : 'http://localhost:8080/';
+const API_URL = axios.create({
+  baseURL: process.env.VUE_APP_BASE_URL
+});
 
 export default new Vuex.Store({
   debug: true,
@@ -21,7 +24,7 @@ export default new Vuex.Store({
   },
   actions: {
     async getDummyData( { commit } ) {
-      axios.get(`${API_URL}content.json`).then((response) => {
+      axios.get('./content.json').then((response) => {
         commit('GET_POST', response.data);
       }).catch((error) => {
         console.log(error);

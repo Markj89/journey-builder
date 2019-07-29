@@ -124,7 +124,7 @@ export default {
     };
   },
   mounted() {
-    //this.startTimer();
+    this.startTimer();
   },
   computed: {
     minutes: function() {
