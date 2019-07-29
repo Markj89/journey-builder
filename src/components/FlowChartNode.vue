@@ -5,7 +5,10 @@
       <div class="icon" v-bind:style="{ 'background-image': 'url(' + icon + ')' }"></div>
       <h1 v-text="label" class="title node-label"></h1>
     </div>
-    <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay' || `${type}` === 'filter'"></div>
+    <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay'"></div>
+    <div class="node-port node-dbl-output-one" @mousedown="outputMouseDown" v-if="`${label}` === 'A/B Split' || `${label}` === 'Yes/No'"></div>
+    <div class="node-port node-dbl-output-two" @mousedown="outputMouseDown" v-if="`${label}` === 'A/B Split' || `${label}` === 'Yes/No'"></div>
+
     <div v-show="show.delete" class="node-delete">&times;</div>
   </div>
 </template>
@@ -146,8 +149,12 @@ $white: #fff;
     bottom: #{-2+-62/-2}px;
     right: #{-2+18/-2}px;
   }
-  .node-dbl-output {
-    bottom: #{-2+-62/-2}px;
+  .node-dbl-output-one {
+    bottom: #{-2+-137/-2}px;
+    right: #{-2+18/-2}px;
+  }
+  .node-dbl-output-two {
+    bottom: #{-2+-1/-2}px;
     right: #{-2+18/-2}px;
   }
   .node-delete {

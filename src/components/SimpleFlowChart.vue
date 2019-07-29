@@ -1,7 +1,7 @@
 <template>
 <div class="flowchart-container" @mousemove="handleMove" @mouseup="handleUp" @mousedown="handleDown">
   <svg width="100%" :height="`${height}vh`" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <flowchart-link v-bind.sync="link" v-for="(link, index) in lines" :key="`link${index}`" @deleteLink="linkDelete(link.id)">
+    <flowchart-link v-bind.sync="link" v-for="(link, index) in lines" :key="`link${index}`" @deleteLink="linkDelete(link.id)" :label="`${diagram.nodes.label}`" :setFilter="setFilter">
     </flowchart-link>
   </svg>
 
@@ -118,6 +118,13 @@ export default {
     closeModal() {
       this.showModal = false;
     },
+    setFilter() {
+      const filterNodes = this.diagram.nodes.find(node => {
+        if (node['label'] === 'Yes/No') {
+          console.log(node['label']);
+        }
+      });
+    },
     setLines() {
       const lines = this.diagram.links.map(link => {
         const fromNode = this.findNodeWithID(link.from);
@@ -131,13 +138,12 @@ export default {
         x = this.diagram.centerX + toNode['x'];
         y = this.diagram.centerY + toNode.y;
         [ex, ey] = this.getPortPosition('top', x, y);
-
         return {
           start: [cx, cy],
           end: [ex, ey],
-          id: link.id,
+          id: link.id
         };
-      })
+      });
 
       if (this.draggingLink && (this.draggingLink.mx || this.draggingLink.my)) {
         let x, y, cy, cx;
