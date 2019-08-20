@@ -47,19 +47,14 @@ html:not([lang=ru]):not([lang=zh]):not([lang=ko]) .typeset p {
 }
 
 // TEXT
-h1, h2, h3, h4, h5, h6, span, small, p, { font-family: $open_sans;}
-h1, h2, h3, h4, h5, h6 {
-	font-family: $montserrat;
-}
+h1, h2, h3, h4, h5, h6, span, small, p, { font-family: $montserrat, $open_sans, sans-serif;}
+
 small {
 	font-size: 75%;
 	font-weight: 300;
 }
 strong, .bold {font-weight: bold; }
 em { font-style: italic; }
-span, small, p {
-	font-family: $open_sans;
-}
 canvas {
 	height: 100%;
 }
@@ -67,7 +62,7 @@ svg {
 	height: 100vh;
 }
 
-p {
+p, span {
 	margin: 0 auto;
 	word-spacing: normal;
 	text-rendering: optimizeLegibility;

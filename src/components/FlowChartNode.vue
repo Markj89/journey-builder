@@ -5,18 +5,20 @@
       <div class="icon" v-bind:style="{ 'background-image': 'url(' + icon + ')' }"></div>
       <h1 v-text="label" class="title node-label"></h1>
     </div>
-    <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay'"></div>
-    <div class="node-port node-dbl-output-one" @mousedown="outputMouseDown" v-if="`${label}` === 'A/B Split' || `${label}` === 'Yes/No'"></div>
-    <div class="node-port node-dbl-output-two" @mousedown="outputMouseDown" v-if="`${label}` === 'A/B Split' || `${label}` === 'Yes/No'"></div>
-
+    <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay' || `${label}` === 'A/B Split' || `${label}` === 'Yes/No'"></div>
     <div v-show="show.delete" class="node-delete">&times;</div>
   </div>
 </template>
 
 <script>
 import EventBus from './../ux/eventBus';
+import FlowChartDoubleLink from './FlowChartDoubleLink.vue';
+
 export default {
   name: 'FlowChartNode',
+  components: {
+    'flowchart-double-link': FlowChartDoubleLink
+  },
   props: {
     id: {
       type: Number,
@@ -83,8 +85,8 @@ export default {
   },
   methods: {
     modalClick(val) {
-      console.log('Double Clicked ', val);
       EventBus.$emit('openModal', val);
+      this.$emit('getModalData', val);
     },
     handleMousedown(e) {
       const target = e.target || e.srcElement;
@@ -100,7 +102,6 @@ export default {
       this.show.delete = false;
     },
     outputMouseDown(e) {
-      console.log('linkingStart ', e);
       this.$emit('linkingStart');
       e.preventDefault(); // Comment out for test use
     },
@@ -149,13 +150,23 @@ $white: #fff;
     bottom: #{-2+-62/-2}px;
     right: #{-2+18/-2}px;
   }
+  #doubleLine {
+    cursor: pointer;
+    position: absolute;
+    left: #{-5+-170/-2}px;
+    top: 0px;
+  }
   .node-dbl-output-one {
-    bottom: #{-2+-137/-2}px;
-    right: #{-2+18/-2}px;
+    top: #{-2+12/-2}px;
+    right: #{-2+120/-2}px;
+    z-index: 10000000;
+    overflow: hidden;
   }
   .node-dbl-output-two {
-    bottom: #{-2+-1/-2}px;
-    right: #{-2+18/-2}px;
+    bottom: #{-2+14/-2}px;
+    right: #{-2+120/-2}px;
+    z-index: 10000000;
+    overflow: hidden;
   }
   .node-delete {
     position: absolute;

@@ -1,8 +1,9 @@
 <template>
   <div id="app" v-bind:class="{'sidebar-background': JourneyEnd === true }">
-    <tutorial v-if="showTutorialModal" @closeTutorialModal="showTutorialModal = false"></tutorial>
-    <simple-flowchart :diagram.sync="diagram" @nodeClick="nodeClick" @nodeDelete="nodeDelete" @linkBreak="linkBreak" @linkAdded="linkAdded" @canvasClick="canvasClick" :height="100" />
-    <sidebar-toggle v-if="JourneyEnd"></sidebar-toggle>
+    <tutorial v-if="showTutorialModal" @closeTutorialModal="showTutorialModal = false" v-on:setContent="onChildClick"></tutorial>
+    <simple-flowchart :diagram.sync="diagram" @nodeClick="nodeClick" @nodeDelete="nodeDelete" @linkBreak="linkBreak" @linkAdded="linkAdded" @canvasClick="canvasClick" :height="100" :modalData="modalData" />
+    <sidebar v-bind:JourneyEnd="JourneyEnd"></sidebar>
+
     <aside id="side_panel" class="sidebar draggable" v-bind:class="{'disable_sidebar disabled': JourneyEnd === true }">
       <div class="workflow_menu_block">
         <div class="workflow_menu_row">
@@ -14,10 +15,6 @@
         </div>
       </div>
     </aside>
-
-    <div class="bottom right">
-      <button class="btn save" @click="JourneyEnd = !JourneyEnd">Save</button>
-    </div>
   </div>
 </template>
 
@@ -25,9 +22,9 @@
 
 // Layouts
 import SimpleFlowchart from './components/SimpleFlowChart.vue';
-import EndGame from './components/EndGame.vue';
-import SideBarToggle from './components/SideBarToggle.vue';
+import SideBar from './components/SideBar.vue';
 import Tutorial from './components/Tutorial.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'app',
@@ -45,17 +42,20 @@ export default {
       {property: 'og:title', content: 'Journey Builder by Maropost'},
       {property: 'og:site_name', content: 'Journey Builder by Maropost'},
       {property: 'og:type', content: 'website'},
+
       // Should the the same as your canonical link, see below.
-      {property: 'og:url', content: 'http://journeybuilder.maropost.com/'},
+      {property: 'og:url', content: 'https://journeybuilder.maropost.com/'},
       {property: 'og:image', content: 'https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png'},
+
       // Often the same as your meta description, but not always.
       {property: 'og:description', content: 'The Demo version of Maropost Journey Builder'},
 
       // Twitter card
       {name: 'twitter:card', content: 'summary'},
-      {name: 'twitter:site', content: 'http://journeybuilder.maropost.com/'},
+      {name: 'twitter:site', content: 'https://journeybuilder.maropost.com/'},
       {name: 'twitter:title', content: 'Journey Builder by Maropost'},
       {name: 'twitter:description', content: 'The Demo version of Maropost Journey Builder'},
+
       // Your twitter handle, if you have one.
       {name: 'twitter:creator', content: '@Maropost'},
       {name: 'twitter:image:src', content: 'https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png'},
@@ -68,8 +68,7 @@ export default {
   },
   components: {
     'simple-flowchart': SimpleFlowchart,
-    'end-game': EndGame,
-    'sidebar-toggle': SideBarToggle,
+    'sidebar': SideBar,
     'tutorial': Tutorial
   },
   data() {
@@ -78,7 +77,8 @@ export default {
       showTutorialModal: true,
       timer: null,
       totalTime: 60,
-      alert: "Time is up!",
+      modalData: [],
+      chosenIndustry: '',
       diagram: {
         centerX: 1024,
         centerY: 140,
@@ -126,6 +126,9 @@ export default {
   mounted() {
     this.startTimer();
   },
+  beforeMount() {
+    this.$store.dispatch('getDummyData');
+  },
   computed: {
     minutes: function() {
       const minutes = Math.floor(this.totalTime / 60);
@@ -135,8 +138,21 @@ export default {
       const seconds = this.totalTime - (this.minutes * 60);
       return this.padTime(seconds);
     },
+    ...mapState([
+      'dummyData'
+    ])
   },
   methods: {
+    onChildClick(val) {
+      const industryData = Object.keys(this.dummyData).map(key => {
+        let items, list;
+        items = this.dummyData[key];
+        for (list in items) {
+          return items[val];
+        }
+      });
+      this.modalData.push(industryData);
+    },
     startTimer() {
       this.timer = setInterval(() => this.countdown(), 1000);
     },
@@ -149,6 +165,7 @@ export default {
       }
       if (this.totalTime === 0) {
         this.JourneyEnd = true;
+        this.$emit('show', this.JourneyEnd);
       }
     },
     addNode(nodes) {

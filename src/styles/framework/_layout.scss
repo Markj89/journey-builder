@@ -1,16 +1,30 @@
+// Breakpoints
 $mobile: 320px;
 $tablet: 720px;
 $desktop: 1024;
 $monitor: 1280;
 
-@mixin screens($screen) {
-  @if $screen == mobile {
-    @media only screen and (min-width: $mobile) { @content; }
-  } @else if $screen == tablet {
-    @media only screen and (min-width:$tablet) { @content; }
-  } @else if $screen == desktop {
-    @media only screen and (min-width: $desktop) { @content; }
-  } @else if $screen == desktop {
-    @media only screen and (min-width: $monitor) { @content; }
+// Media Queries
+@mixin mobile {
+  @media (min-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@mixin monitor {
+  @media (min-width: #{$monitor}) {
+    @content;
   }
 }

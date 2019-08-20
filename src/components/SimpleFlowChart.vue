@@ -1,14 +1,19 @@
 <template>
 <div class="flowchart-container" @mousemove="handleMove" @mouseup="handleUp" @mousedown="handleDown">
   <svg width="100%" :height="`${height}vh`" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <flowchart-link v-bind.sync="link" v-for="(link, index) in lines" :key="`link${index}`" @deleteLink="linkDelete(link.id)" :label="`${diagram.nodes.label}`" :setFilter="setFilter">
+    <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000" />
+    </marker>
+  </defs>
+    <flowchart-link v-bind.sync="link" v-for="(link, index) in lines" :key="`link${index}`" @deleteLink="linkDelete(link.id)">
     </flowchart-link>
   </svg>
 
-  <flowchart-modal v-if="showModal && modal === `${node.modal}`" v-for="(node, index) in diagram.nodes" :key="`node${node.id}`" v-bind.sync="node" @openModal="showModal" @closeModal="showModal = false">
+  <flowchart-modal v-if="showModal && modal === `${node.modal}`" v-for="(node, index) in diagram.nodes" :key="`node${node.id}`" v-bind.sync="node" @openModal="showModal" :modalContent="modalContent" @closeModal="showModal = false">
   </flowchart-modal>
   <flowchart-node v-bind.sync="node" v-for="(node, index) in diagram.nodes" :key="`node${node.id}` + 1" :ref="`node${node.id}`" v-bind:class="`workflow_${node.type}`" :options="nodeOptions" @linkingStart="linkingStart(node.id)"
-    @linkingStop="linkingStop(node.id)" @nodeSelected="nodeSelected(node.id, $event)">
+    @linkingStop="linkingStop(node.id)" @nodeSelected="nodeSelected(node.id, $event)" v-on:getModalData="filterModalData">
     <slot :node="node"></slot>
   </flowchart-node>
 </div>
@@ -29,6 +34,9 @@ export default {
     'flowchart-modal': FlowChartModal,
   },
   props: {
+    modalData: {
+      type: Array
+    },
     diagram: {
       type: Object,
       default () {
@@ -51,6 +59,7 @@ export default {
       showModal: false,
       delay: 700,
       modal: '',
+      modalContent: [],
       clicks: 0,
       action: {
         linking: false,
@@ -95,7 +104,7 @@ export default {
     draggingLink: {
       handler: 'setLines',
       deep: true,
-      //immediate: true,
+      immediate: true,
     },
     showModal: {
       handler() {
@@ -114,17 +123,37 @@ export default {
     });
   },
   methods: {
-    openModal(data) {},
+    filterModalData() {
+      for (let i = 0; i < this.modalData.length; i++) {
+        const getModalName = this.modalData[i];
+
+        for (let item in getModalName) {
+          let modalItem = getModalName[item];
+
+          for (let val in modalItem) {
+            if (Object.keys(modalItem[val]) == this.modal) {
+              this.modalContent = Object.assign({}, modalItem[val]);
+            }
+          }
+        }
+      }
+    },
+
+    /**
+     *  Open Modal data
+     */
+    //openModal(data) {},
+
+    /**
+     *  Close Modal
+    */
     closeModal() {
       this.showModal = false;
     },
-    setFilter() {
-      const filterNodes = this.diagram.nodes.find(node => {
-        if (node['label'] === 'Yes/No') {
-          console.log(node['label']);
-        }
-      });
-    },
+
+    /**
+     *  Set our line links between each nodes
+     */
     setLines() {
       const lines = this.diagram.links.map(link => {
         const fromNode = this.findNodeWithID(link.from);
@@ -161,11 +190,19 @@ export default {
       this.lines = lines;
       EventBus.$emit('dAttr', lines);
     },
+
+    /**
+     * Find node array by ID
+     */
     findNodeWithID(id) {
       return this.diagram.nodes.find((item) => {
         return id === item['id'];
-      })
+      });
     },
+
+    /**
+     *  Set position of lines
+    */
     getPortPosition(type, x, y) {
       if (type === 'top') {
         return [x + 20 / 4, y + 45];
@@ -311,7 +348,6 @@ export default {
     margin: 0;
     background: #ddd;
     position: relative;
-    //overflow: hidden;
     svg {
         cursor: grab;
     }

@@ -1,35 +1,59 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
-//import content from '../public/content.json';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
+import ui from './ux/ui';
 
-Vue.use(Vuex, axios)
-const API_URL = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL
-});
+const BASE_URL = 'http://localhost:3000/';
+
+Vue.use(Vuex, axios);
+const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
+  strict: debug,
+  modules: {
+    ui
+  },
   debug: true,
   state: {
-    //lines: [],
     dummyData:[],
+    someGlobalState: null,
   },
   mutations: {
     GET_POST(state, dummyData) {
-      state.dummyData = dummyData;
+      state.dummyData =  dummyData;
     },
     setContent(state, dummyData) {
-      state.dummyData = dummyData;
+      state.dummyData =  dummyData;
+    },
+    SET_MUTATION(state, responseData) {
+      state.someGlobalState = responseData;
     }
   },
   actions: {
+    async subscriptionData({ commit }, opts) {
+      return axios.post('/api.php', opts).then((res) => {
+        commit('SOME_MUTATION', response.data);
+      })
+    },
     async getDummyData( { commit } ) {
-      axios.get('./content.json').then((response) => {
+      axios.get(`${BASE_URL}`, {
+        useCredentails: true,
+        crossdomain: true,
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }).then(function(response) {
         commit('GET_POST', response.data);
-      }).catch((error) => {
-        console.log(error);
+      }).catch(function(error) {
+        if (error.response) {
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log(error.message);
+        }
+        console.log(error.config);
       });
     }
   },
-  getters: {}
 })

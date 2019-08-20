@@ -1,3 +1,4 @@
+// Left Sidebar
 #side_panel {
   width: 10%;
   position: absolute;
@@ -15,6 +16,11 @@
     width: 100%;
     padding-top: 8px;
     .workflow_menu_row {
+      h1 {
+        font-size: 1rem;
+        color: #fff;
+        letter-spacing: 1px;
+      }
       label {
         -webkit-box-shadow: inset 0px 0px 2px 0px #ccc;
         -moz-box-shadow: inset 0px 0px 2px 0px #ccc;
@@ -22,6 +28,7 @@
         display: block;
         font-size: 1.2rem;
         text-align: center;
+        text-rendering: optimizeLegibility;
         padding: 0px;
         margin: 0px;
         line-height: 14px;
@@ -45,6 +52,7 @@
             color: $white;
             background-color: $triggers_color;
             border-color: $triggers_color;
+            background-image: linear-gradient(#27ae60, #219d55);
             @include hover-background(#219d55, $white);
             -webkit-box-shadow: inset 0 -2px #219d55;
             -moz-box-shadow: inset 0 -2px #219d55;
@@ -53,31 +61,38 @@
           &.filter {
             background-color: $filter_color;
             border-color:$filter_color;
+            background-image: linear-gradient(#e67e22, #da751c);
             @include hover-background(#CC701F, $white);
-            -webkit-box-shadow: inset 0 -2px $filter_color;
-            -moz-box-shadow: inset 0 -2px $filter_color;
-            box-shadow: inset 0 -2px $filter_color;
+            -webkit-box-shadow: inset 0 -2px #CC701F;
+            -moz-box-shadow: inset 0 -2px #CC701F;
+            box-shadow: inset 0 -2px #CC701F;
           }
           &.end {
             background-color: $end_color;
             border-color: $end_color;
-            -webkit-box-shadow: inset 0 -2px $end_color;
-            -moz-box-shadow: inset 0 -2px $end_color;
-            box-shadow: inset 0 -2px $end_color;
+            background-image: linear-gradient(#c0392b, #b53224);
+            @include hover-background(#b53224, $white);
+            -webkit-box-shadow: inset 0 -2px #b53224;
+            -moz-box-shadow: inset 0 -2px #b53224;
+            box-shadow: inset 0 -2px #b53224;
           }
           &.delay {
             background-color: $delay_color;
             border-color: $delay_color;
-            -webkit-box-shadow: inset 0 -2px $delay_color;
-            -moz-box-shadow: inset 0 -2px $delay_color;
-            box-shadow: inset 0 -2px $delay_color;
+            background-image: linear-gradient(#34495e, #263849);
+            @include hover-background(#263849, $white);
+            -webkit-box-shadow: inset 0 -2px #263849;
+            -moz-box-shadow: inset 0 -2px #263849;
+            box-shadow: inset 0 -2px #263849;
           }
           &.action {
             background-color: $actions_color;
             border-color: $actions_color;
-            -webkit-box-shadow: inset 0 -2px $actions_color;
-            -moz-box-shadow: inset 0 -2px $actions_color;
-            box-shadow: inset 0 -2px $actions_color;
+            background-image: linear-gradient(#3498db, #2a8bcc);
+            @include hover-background(#2a8bcc, $white);
+            -webkit-box-shadow: inset 0 -2px #2a8bcc;
+            -moz-box-shadow: inset 0 -2px #2a8bcc;
+            box-shadow: inset 0 -2px #2a8bcc;
           }
           list-style: none;
           margin: 0px;
@@ -91,6 +106,8 @@
             color: #fff;
             margin-bottom: 2px;
             border-radius: 2px;
+            text-rendering: optimizeLegibility;
+            letter-spacing: 0.2px;
             &:hover {
               color: #fff;
               text-decoration: none;
@@ -102,6 +119,7 @@
   }
 }
 
+// Right Sidebar
 .sidebarToggle {
   width: 30%;
   max-width: 595px;
@@ -111,7 +129,6 @@
   display: flex;
   display: -ms-flexbox;
   display: -webkit-box;
-  overflow: scroll;
   float: right;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -120,14 +137,26 @@
   -webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
   box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
   right: 0;
+  -moz-transition: all .25s ease;
   -webkit-transition: all .25s ease;
   transition: all .25s ease;
   z-index: 40000;
+
+  .sidebar-h3 {
+    font-size: 20px;
+    font-family: 'Montserrat Bold', sans-serif;
+    font-weight: 600;
+    line-height: 10px;
+  }
   .sidebar-nav {
     text-align: left;
     .bd-content {
-      padding: 50px 50px;
+      padding: 50px 35px;
       text-align: left;
+      .bd-content-title {
+        font-size: 35px;
+        font-family: "Montserrat Extra Bold", sans-serif;
+      }
     }
     .sidebarHighlight {
       background-color: $blue-light;

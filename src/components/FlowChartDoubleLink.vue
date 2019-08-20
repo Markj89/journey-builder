@@ -1,22 +1,22 @@
 <template>
-  <g @mouseover="handleMouseOver"
-    @mouseleave="handleMouseLeave">
-    <path :d="checkLine" :style="pathStyle" marker-end="url(#arrow)"></path>
-    <!--<path :d="dAttr" :style="pathStyle"></path>-->
+  <g @mouseover="handleMouseOver" @mouseleave="handleMouseLeave">
+    <path marker-end="url(#arrow)" :style="firstLine" d="M 694, 230 L 794, 230, 852, 299, 952, 299"></path>
     <a v-if="show.delete" @click="deleteLink">
       <text text-anchor="middle" :transform="arrowTransform" font-size="22">&times;</text>
     </a>
-    <!--<path d="M 20, -130 L 15, -140 L 10 -130 z" :style="arrowStyle" :transform="arrowTransform"></path>-->
-    <!--<path v-else d="M -1 -1 L 0 1 L 1 -1 z"
-      :style="arrowStyle"
-      :transform="arrowTransform"></path>-->
+    <path v-else d="M 694, 230 L 794, 230, 852, 299, 952, 299" :style="arrowStyle" marker-end="url(#arrow)" :transform="arrowTransform"></path>
+    <path marker-end="url(#arrow)" :style="secondLine" d="M 694, 230 L 794, 230, 851, 177, 951, 177" ></path>
+    <a v-if="show.delete" @click="deleteLink">
+      <text text-anchor="middle" :transform="arrowTransform" font-size="22">&times;</text>
+    </a>
+    <path v-else d="M 694, 230 L 794, 230, 851, 177, 951, 177" :style="arrowStyle" marker-end="url(#arrow)" :transform="arrowTransform"></path>
   </g>
 </template>
 
 <script>
 import EventBus from './../ux/eventBus';
 export default {
-  name: 'FlowChartLink',
+  name: 'FlowChartDoubleLink',
   props: {
     start: {
       type: Array,
@@ -60,10 +60,15 @@ export default {
       this.$emit('deleteLink');
     }
   },
-  mounted() {
-  },
   computed: {
-    pathStyle() {
+    firstLine() {
+      return {
+        stroke: 'rgb(2, 2, 2)',
+        strokeWidth: 2.73205,
+        fill: 'none',
+      }
+    },
+    secondLine() {
       return {
         stroke: 'rgb(2, 2, 2)',
         strokeWidth: 2.73205,
@@ -106,10 +111,10 @@ export default {
 
       if (secondStartLine <= secondEndLine || firstStartLine <= firstEndLine) {
         line1 = firstStartLine + 200, line2 = secondStartLine, line3 = firstEndLine, line4 = secondEndLine;
-        newLine = `M ${firstStartLine}, ${secondStartLine} L ${line1 - 100}, ${line2}, ${line3 - 100}, ${line4}, ${firstEndLine}, ${secondEndLine}`;
-      } else if (secondStartLine >= secondEndLine || firstStartLine >= firstEndLine) {
+        val = `M ${firstStartLine}, ${secondStartLine} L ${line1 - 100}, ${line2}, ${line3 - 100}, ${line4}, ${firstEndLine}, ${secondEndLine}`;
+      } else {
         line1 = firstStartLine, line2 = secondStartLine, line3 = firstEndLine, line4 = secondEndLine;
-        newLine = `M ${firstStartLine}, ${secondStartLine} C ${line1}, ${line2}, ${line3}, ${line4}, ${firstEndLine}, ${secondEndLine}`;
+        val = `M ${firstStartLine}, ${secondStartLine} C ${line1}, ${line2}, ${line3}, ${line4}, ${firstEndLine}, ${secondEndLine}`;
       }
       return newLine;
     }

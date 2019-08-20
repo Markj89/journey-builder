@@ -1,47 +1,112 @@
 <template>
-  <div class="sidebar sidebarToggle">
-    <nav class="sidebar-nav">
-      <div class="row flex-xl-nowrap">
-        <div class="col-12 col-md-12 col-xl-12 bd-sidebar">
-          <div class="bd-content">
-            <h1 class="bd-content-title blue-text"><strong>Simplifying Your Cross-Channel Engagement</strong></h1>
-
-            <p>Most marketing teams are using a multi-channel strategy, leveraging two or more of these channels, but not focusing on creating consistent messaging from one to the next.</p>
-            <p>Effective cross-channel engagement is possible; understanding your customers and using that understanding to create meaningful journeys is the first step, followed by getting the right tools in place.
-            <a href="https://www.maropost.com/" class="link">Maropost</a> automates marketing processes, leveraging data to maximize efficiency across the journey and provide a personal experience for every customer.</p>
-
-            <h3 class="bd-content-title"><strong>Or contact us directly!</strong></h3>
-            <ul class="list-unstyled">
-              <li>Phone: <a :href="`${phone}`" class="link">{{ phone }}</a></li>
-              <li>Email: <a :href="`${email}`" class="link">{{ email }}</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="sidebarHighlight">
-        <h4 class="white-text">Are you a customer?</h4>
-        <div class="col-md-3">
-          <span class="white-text">Click here to contact support with any questions around your custom journeys</span>
-        </div>
-      </div>
-    </nav>
+  <div class="sidebar-position" v-bind:class="isClicked">
+    <i class="fas" v-bind:class="active"></i>
+    <input type="checkbox" name="handleClick" class="sidebar-button" v-model="checked" @click="handleClick" />
   </div>
 </template>
 
+<style lang="scss">
+  .sidebar-position {
+    position: absolute;
+    z-index: 200000;
+    background-color: #03B6FC;
+    vertical-align: center;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+    top: 6%;
+    left: -6%;
+    width: 30px;
+    transition: all 400ms ease-out;
+    -webkit-transition: all 400ms ease-out;
+    -moz-transition: all 400ms ease-out;
+    transform: translate(-1%, -50%);
+    -webkit-transform: translate(-1%, -50%);
+    -moz-transform: translate(-1%, -50%);
+    &.go-right {
+      background-color: $white;
+    }
+    .sidebar-button {
+      width: 100%;
+      height: 50px;
+      opacity: 0;
+      border: none;
+      cursor: pointer;
+      border-left: 1px solid #D4D4D4;
+      &:checked {
+        background-color: $white;
+      }
+    }
+    .fas {
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .fa-chevron-right {
+      color: $blue_light;
+      position: absolute;
+      bottom: 15px;
+      right: 10px;
+    }
+    .fa-chevron-left {
+      color: $white;
+      position: absolute;
+      bottom: 15px;
+      right: 10px;
+    }
+  }
+</style>
+
 <script>
-  export default {
-    name: 'SideBarToggle',
-    data() {
-      return {
-        phone: '1.888.438.3152 Ext: 1',
-        email: 'sales@maropost.com'
+import { TweenMax, Power3 } from 'gsap';
+
+export default {
+  name: 'Sidebar-Toggle',
+  data() {
+    return {
+      checked: false,
+      right: '',
+      isClicked: null,
+      active: 'fa-chevron-left',
+      opened: 'fa-chevron-left',
+      closed: 'fa-chevron-right'
+    };
+  },
+  props: {
+    JourneyEnd : {
+      type: Boolean
+    }
+  },
+  watch: {
+    JourneyEnd: {
+      handler(val) {
+        this.JourneyEnd = val;
+        console.log(this.JourneyEnd);
+
+        if (this.JourneyEnd === true) {
+          this.$store.dispatch('toggleSidebar');
+
+          this.active = this.opened;
+          this.isClicked = null;
+        }
+      },
+      deep: true,
+      immediate: true
+    },
+  },
+  computed: {
+    open() {
+      return this.$store.state.ui.sidebarOpen;
+    }
+  },
+  methods: {
+    handleClick() {
+      this.$store.dispatch('toggleSidebar');
+      if (this.checked === true) {
+        this.active = this.opened;
+        this.isClicked = null;
+      } else {
+        this.active = this.closed;
+        this.isClicked = 'go-right';
       }
     }
   }
-</script>
-
-<style>
-.sidebarToggle {
-  background-image: url('../assets/sidebarToggleBackground.png');
 }
-</style>
+</script>

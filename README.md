@@ -6,6 +6,7 @@ A demo version of the Maropost Journey Builder for the sales team to present in 
  - Delete Link
 
 ![Screenshot](https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png)
+[Live Version](https://journeybuilder.maropost.com/)
 
 ## Prerequisites
 - [Vue Dev Tools](https://github.com/vuejs/vue-devtools)
@@ -45,6 +46,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [FontAwesome](https://fontawesome.com/?from=io)
 - [Babel](https://babeljs.io/)
 - [Eslint](https://eslint.org/)
+- [axios](https://github.com/axios/axios)
+- [ExpressJS](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
 
 
 ### Authors
