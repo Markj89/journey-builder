@@ -3,7 +3,8 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import ui from './ux/ui';
 
-const BASE_URL = 'http://localhost:3000/';
+//const BASE_URL = 'http://localhost:3000/'; MongoDB
+const BASE_URL = './content.json'; // Basic Dummy Data
 
 Vue.use(Vuex, axios);
 const debug = process.env.NODE_ENV !== 'production';

@@ -1,0 +1,1282 @@
+[{
+	"Publishing": [{
+			"NewSubscription": [
+				"Newsletter",
+				"Blog",
+				"International News",
+				"Local News",
+				"Technology News"
+			]
+		},
+		{
+			"CampaignOpened": [
+				"Re-Engagement",
+				"Welcome Series",
+				"Breaking News"
+			]
+		},
+		{
+			"LinkClicked": {
+				"link": "https://www.publishinghouse.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+				"title": "Publishing House"
+			}
+		},
+		{
+			"ProductPurchased": {
+				"link": "https://www.publishinghouse.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+				"title": "Preference Page"
+			}
+		},
+		{
+			"TotalRevenue": {
+				"title": 1289
+			}
+		},
+		{
+			"FormEvent": [
+				"Subscription Form",
+				"Cancellation Form"
+			]
+		},
+		{
+			"ApiEvent": [
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?contact_id=12345",
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?email=homer@example.com",
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?table=users&where[user_id]=123"
+			]
+		},
+		{
+			"SegmentEvent": [
+				"Re-engagement Segment",
+				"Free Tier - Upsell Segment"
+			]
+		},
+		{
+			"ContactField": [
+				"account_id",
+				"account_name",
+				"business_name",
+				"company",
+				"create_date",
+				"current_provider",
+				"email",
+				"email_volume",
+				"first_name",
+				"free_trial",
+				"industry",
+				"job_title",
+				"last_name",
+				"lead_source",
+				"profession",
+				"rating",
+				"state"
+			]
+		},
+		{
+			"TableFieldUpdated": []
+		},
+		{
+			"SubscriptionChanged": [
+				"Free Tier List",
+				"Essentials Tier List",
+				"Premier Tier List"
+			]
+		},
+		{
+			"TagEvent": [
+				"Subscription"
+			]
+		},
+		{
+			"WebPageEvent": [{
+					"pageViews": {
+						"link": "https://www.publishinghouse.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+						"title": "Publishing House"
+					}
+				},
+				{
+					"linkClicks": {
+						"link": "https://www.publishinghouse.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+						"title": "Publishing House"
+					}
+				},
+				{
+					"websites": [
+						"https://www.publishinghouse.com/"
+					]
+				},
+				{
+					"funnels": [
+						"Subscription Funnel",
+						"Abandoned"
+					]
+				}
+			]
+		},
+		{
+			"SendEmail": [{
+					"Name": "Weekly Review"
+				},
+				{
+					"Subject": "📩 What you missed this week"
+				},
+				{
+					"Preheader": "Subscribe today for your premium content"
+				},
+				{
+					"From Name": "Publishing House"
+				},
+				{
+					"From Email": "news@publishinghouse.com"
+				},
+				{
+					"Reply-To": "news@publishinghouse.com"
+				},
+				{
+					"Brand": [
+						"Publishing House",
+						"Business Review"
+					]
+				},
+				{
+					"Content": "Weekly 06/03/2019 \n Weekly 06/10/2019 \n Weekly 06/17/2019"
+				},
+				{
+					"Preview Link": "✓"
+				},
+				{
+					"Address": "255 Collage Ave. Suite 189"
+				},
+				{
+					"Language": "English"
+				},
+				{
+					"Campaign Tags": [
+						"Weekly",
+						"Monthly",
+						"Quarterly",
+						"Business",
+						"International",
+						"Paid Subscriber"
+					]
+				},
+				{
+					"Secure Suppression List": [
+						"Full List",
+						"GDPR",
+						"Can Spam"
+					]
+				}
+			]
+		},
+		{
+			"SendMessage": [{
+					"Name": "Weekend Promotion"
+				},
+				{
+					"Message": "Breaking News"
+				}
+			]
+		},
+		{
+			"SendPushMessage": [
+				"Promo",
+				"Breaking News"
+			]
+		},
+		{
+			"HttpPost": [{
+				"link": "https://www.publishinghouse.com/post.json",
+				"title": "Publishing House"
+			}]
+		},
+		{
+			"TriggerWorkflow": {
+				"checkboxes": [
+					"Re-Engagement Journey",
+					"Welcome Series",
+					"New Subscription"
+				],
+				"select": [
+					"New Subscription",
+					"Contact Field Updated",
+					"Segment Event",
+					"Form Event",
+					"Subscription Changed"
+				]
+			}
+		},
+		{
+			"SendToFacebook": {
+				"Mappings": [{
+						"FN": "Sarah"
+					},
+					{
+						"LN": "Pavan"
+					},
+					{
+						"GEN": ["F", "M"]
+					},
+					{
+						"CT": "Clearwater"
+					},
+					{
+						"ST": "FL"
+					},
+					{
+						"Country": "US"
+					},
+					{
+						"MADID": "6D92078A-8246-4BA4-AE5B-76104861E7DC"
+					},
+					{
+						"APPUID": "1015236885205290"
+					},
+					{
+						"DOB": 3271989
+					}
+				],
+				"Audience": [{
+						"Facebook Account": "Maropost Topper"
+					},
+					{
+						"Add Account": ""
+					}
+				]
+			}
+		},
+		{
+			"EndWorkflow": [
+				"Welcome Series",
+				"On-Boarding"
+			]
+		},
+		{
+			"ChangeContactField": [{
+				"Subscription": ["Yes", "No"]
+			}]
+		},
+		{
+			"ChangeTableField": [{
+				"Company Phone": "555-550-5555"
+			}]
+		},
+		{
+			"ChangeSubscription": [
+				"Newsletter",
+				"Blog"
+			]
+		},
+		{
+			"ChangeTag": {
+				"Add": [
+					"Traffic",
+					"Lead",
+					"Sales",
+					"Retain"
+				],
+				"Remove": [
+					"Traffic",
+					"Lead",
+					"Sales",
+					"Retain"
+				]
+			}
+		},
+		{
+			"YesNo": [
+				"New Subscriber",
+				"Logged In"
+			]
+		},
+		{
+			"Case": ["Started Invoicing"]
+		},
+		{
+			"Split": [
+				"10%",
+				"20%",
+				"50%",
+				"100%"
+			]
+		},
+		{
+			"AbSplit": [
+				""
+			]
+		},
+		{
+			"Delay": [""]
+		},
+		{
+			"DelayUntil": [""]
+		},
+		{
+			"End": [""]
+		}
+	],
+
+	"Eccommerce": [{
+			"NewSubscription": [
+				"Promotions",
+				"Paid Customer",
+				"Monthly Style Guide",
+				"Men's",
+				"Women's"
+			]
+		},
+		{
+			"CampaignOpened": [
+				"Re-Engagement",
+				"Long Weekend Sale",
+				"Black Friday"
+			]
+		},
+		{
+			"LinkClicked": {
+				"link": "https://www.shopping.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+				"title": "Shopping.com"
+			}
+		},
+		{
+			"ProductPurchased": {
+				"link": "https://www.shopping.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+				"title": "Preference Page"
+			}
+		},
+		{
+			"TotalRevenue": {
+				"title": 40
+			}
+		},
+		{
+			"FormEvent": [
+				"Order Form",
+				"Billing Form",
+				"Subscription Form"
+			]
+		},
+		{
+			"ApiEvent": [
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?contact_id=12345",
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?email=homer@example.com",
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?table=users&where[user_id]=123"
+			]
+		},
+		{
+			"SegmentEvent": [
+				"Purchased in last 60 days Segment",
+				"Viewed 5+ Products and Did Not Purchase",
+				"Recovered Cart"
+			]
+		},
+		{
+			"ContactField": [
+				"account_id",
+				"account_name",
+				"business_name",
+				"company",
+				"create_date",
+				"current_provider",
+				"email",
+				"email_volume",
+				"first_name",
+				"free_trial",
+				"industry",
+				"job_title",
+				"last_name",
+				"lead_source",
+				"profession",
+				"rating",
+				"state"
+			]
+		},
+		{
+			"TableFieldUpdated": []
+		},
+		{
+			"SubscriptionChanged": [
+				"Subscription Box",
+				"Subscription Box Plus",
+				"Newsletter"
+			]
+		},
+		{
+			"TagEvent": [
+				"Product Purchased",
+				"Interests - Technology",
+				"Interests - Apparel"
+			]
+		},
+		{
+			"WebPageEvent": [{
+					"pageViews": {
+						"link": "https://www.shopping.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+						"title": "Shopping.com"
+					}
+				},
+				{
+					"linkClicks": {
+						"link": "https://www.shopping.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+						"title": "Shopping.com"
+					}
+				},
+				{
+					"websites": [
+						"https://www.shopping.com/",
+						"https://www.buynow.com"
+					]
+				},
+				{
+					"funnels": [
+						"Shopping Cart Funnel",
+						"Abandoned"
+					]
+				}
+			]
+		},
+		{
+			"SendEmail": [{
+					"Name": "Abandoned Cart Email"
+				},
+				{
+					"Subject": "👋 Come back! We miss you!"
+				},
+				{
+					"Preheader": "You left items in your cart"
+				},
+				{
+					"From Name": "Shopping.com"
+				},
+				{
+					"From Email": "cart@shopping.com"
+				},
+				{
+					"Reply-To": "cart@shopping.com"
+				},
+				{
+					"Brand": [
+						"Shopping.com",
+						"Buynow.com"
+					]
+				},
+				{
+					"Content": "Abandoned Cart Email \n Purchased in last 60 days Segment \n Viewed 5+ Products and Did Not Purchase \n Recovered Cart"
+				},
+				{
+					"Preview Link": "✓"
+				},
+				{
+					"Address": "255 Collage Ave. Suite 189"
+				},
+				{
+					"Language": "English"
+				},
+				{
+					"Campaign Tags": [
+						"Cart",
+						"Welcome",
+						"Subscription",
+						"Blog",
+						"Newsletter"
+					]
+				},
+				{
+					"Secure Suppression List": [
+						"Full List",
+						"GDPR",
+						"Can Spam"
+					]
+				}
+			]
+		},
+		{
+			"SendMessage": [{
+					"Name": "Weekend Promotion"
+				},
+				{
+					"Message": "New Collection"
+				}
+			]
+		},
+		{
+			"SendPushMessage": [
+				"Weekend Promotion",
+				"New Collection"
+			]
+		},
+		{
+			"HttpPost": [{
+				"link": "https://www.shopping.com/post.json",
+				"title": "Shopping.com"
+			}]
+		},
+		{
+			"TriggerWorkflow": {
+				"checkboxes": [
+					"Re-Engagement Journey",
+					"Abandoned Cart",
+					"New Subscription"
+				],
+				"select": [
+					"New Subscription",
+					"Contact Field Updated",
+					"Segment Event",
+					"Form Event",
+					"Subscription Changed"
+				]
+			}
+		},
+		{
+			"SendToFacebook": {
+				"Mappings": [{
+						"FN": "Sarah"
+					},
+					{
+						"LN": "Pavan"
+					},
+					{
+						"GEN": ["F", "M"]
+					},
+					{
+						"CT": "Clearwater"
+					},
+					{
+						"ST": "FL"
+					},
+					{
+						"Country": "US"
+					},
+					{
+						"MADID": "6D92078A-8246-4BA4-AE5B-76104861E7DC"
+					},
+					{
+						"APPUID": "1015236885205290"
+					},
+					{
+						"DOB": 3271989
+					}
+				],
+				"Audience": [{
+						"Facebook Account": "Maropost Topper"
+					},
+					{
+						"Add Account": ""
+					}
+				]
+			}
+		},
+		{
+			"EndWorkflow": [
+				"Welcome Series",
+				"On-Boarding"
+			]
+		},
+		{
+			"ChangeContactField": [{
+				"Status": ["Purchased", "Not Purchased"]
+			}]
+		},
+		{
+			"ChangeTableField": [{
+				"Company Phone": "555-550-5555"
+			}]
+		},
+		{
+			"ChangeSubscription": [
+				"Newsletter",
+				"Blog"
+			]
+		},
+		{
+			"ChangeTag": {
+				"Add": [
+					"Traffic",
+					"Lead",
+					"Sales",
+					"Retain"
+				],
+				"Remove": [
+					"Traffic",
+					"Lead",
+					"Sales",
+					"Retain"
+				]
+			}
+		},
+		{
+			"YesNo": [
+				"New Subscriber",
+				"Logged In"
+			]
+		},
+		{
+			"Case": ["Started Invoicing"]
+		},
+		{
+			"Split": [
+				"10%",
+				"20%",
+				"50%",
+				"100%"
+			]
+		},
+		{
+			"AbSplit": [
+				""
+			]
+		},
+		{
+			"Delay": [""]
+		},
+		{
+			"DelayUntil": [""]
+		},
+		{
+			"End": [""]
+		}
+	],
+	"Health & Wellness": [{
+			"NewSubscription": [
+				"Ab Blasters",
+				"Women's Fitness",
+				"Body Weight Training",
+				"Dieting for Dummy",
+				"Equipment Reviews"
+			]
+		},
+		{
+			"CampaignOpened": [
+				"Lose Weight in 10 Steps",
+				"Food for Thought",
+				"Black Friday Sales"
+			]
+		},
+		{
+			"LinkClicked": {
+				"link": "https://www.yourhealth.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+				"title": "Your Health"
+			}
+		},
+		{
+			"ProductPurchased": {
+				"link": "https://www.yourhealth.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+				"title": "Preference Page"
+			}
+		},
+		{
+			"TotalRevenue": {
+				"title":995
+			}
+		},
+		{
+			"FormEvent": [
+				"Order Form",
+				"Billing Form",
+				"Subscription Form"
+			]
+		},
+		{
+			"ApiEvent": [
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?contact_id=12345",
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?email=homer@example.com",
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?table=users&where[user_id]=123"
+			]
+		},
+		{
+			"SegmentEvent": [
+				"Logged in 10 days ago",
+				"Male - 30+ YR Old - Subscribed to Program",
+				"Female - >20 YR Old - Did Not Subscribe"
+			]
+		},
+		{
+			"ContactField": [
+				"account_id",
+				"account_name",
+				"business_name",
+				"company",
+				"create_date",
+				"current_provider",
+				"email",
+				"email_volume",
+				"first_name",
+				"free_trial",
+				"industry",
+				"job_title",
+				"last_name",
+				"lead_source",
+				"profession",
+				"rating",
+				"state"
+			]
+		},
+		{
+			"TableFieldUpdated": []
+		},
+		{
+			"SubscriptionChanged": [
+				"unsubscribed",
+				"Subscribed",
+				"Renewed"
+			]
+		},
+		{
+			"TagEvent": [
+				"Subscription Purchased",
+				"Interests - Ab Blaser",
+				"Interests - Women's Fitness"
+			]
+		},
+		{
+			"WebPageEvent": [{
+					"pageViews": {
+						"link": "https://www.yourhealth.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+						"title": "Your Health"
+					}
+				},
+				{
+					"linkClicks": {
+						"link": "https://www.yourhealth.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+						"title": "Your Health"
+					}
+				},
+				{
+					"websites": [
+						"https://www.yourhealth.com/",
+						"https://www.ab-blaster.com/"
+					]
+				},
+				{
+					"funnels": [
+						"Subscription Funnel",
+						"Abandoned"
+					]
+				}
+			]
+		},
+		{
+			"SendEmail": [{
+					"Name": "Ab Blaster Promotion"
+				},
+				{
+					"Subject": "💪 Get abs in 60 days with our program"
+				},
+				{
+					"Preheader": "Guaranteed"
+				},
+				{
+					"From Name": "Yourhealth.com"
+				},
+				{
+					"From Email": "success@yourhealth.com"
+				},
+				{
+					"Reply-To": "success@yourhealth.com"
+				},
+				{
+					"Brand": [
+						"Yourhealth.com",
+						"Ab-Blaster.com"
+					]
+				},
+				{
+					"Content": "Ab Blaster Newsletter \n Day 1 - 3 Days to healthy living \n Day 2 - 3 Days to healthy living \n Day 3 - 3 Days to healthy living"
+				},
+				{
+					"Preview Link": "✓"
+				},
+				{
+					"Address": "255 Collage Ave. Suite 189 Toronto, Ontario, Canada, M5H 3B7"
+				},
+				{
+					"Language": "English"
+				},
+				{
+					"Campaign Tags": [
+						"Ab Blaster",
+						"Women's",
+						"Men's",
+						"Welcome",
+						"Subscription",
+						"Blog",
+						"Newsletter"
+					]
+				},
+				{
+					"Secure Suppression List": [
+						"Full List",
+						"GDPR",
+						"Can Spam"
+					]
+				}
+			]
+		},
+		{
+			"SendMessage": [{
+					"Name": "Protein Promotion"
+				},
+				{
+					"Message": "Flash Sale"
+				}
+			]
+		},
+		{
+			"SendPushMessage": [
+				"Protein Promotion",
+				"Flash Sale"
+			]
+		},
+		{
+			"HttpPost": [{
+				"link": "https://www.yourhealth.com/post.json",
+				"title": "Your Health"
+			}]
+		},
+		{
+			"TriggerWorkflow": {
+				"checkboxes": [
+					"Re-Engagement Journey",
+					"Welcome Series",
+					"New Subscription"
+				],
+				"select": [
+					"New Subscription",
+					"Contact Field Updated",
+					"Segment Event",
+					"Form Event",
+					"Subscription Changed"
+				]
+			}
+		},
+		{
+			"SendToFacebook": {
+				"Mappings": [{
+						"FN": "Sarah"
+					},
+					{
+						"LN": "Pavan"
+					},
+					{
+						"GEN": ["F", "M"]
+					},
+					{
+						"CT": "Clearwater"
+					},
+					{
+						"ST": "FL"
+					},
+					{
+						"Country": "US"
+					},
+					{
+						"MADID": "6D92078A-8246-4BA4-AE5B-76104861E7DC"
+					},
+					{
+						"APPUID": "1015236885205290"
+					},
+					{
+						"DOB": 3271989
+					}
+				],
+				"Audience": [{
+						"Facebook Account": "Maropost Topper"
+					},
+					{
+						"Add Account": ""
+					}
+				]
+			}
+		},
+		{
+			"EndWorkflow": [
+				"Welcome Series",
+				"On-Boarding"
+			]
+		},
+		{
+			"ChangeContactField": [{
+				"Subscription": ["Yes", "No"]
+			}]
+		},
+		{
+			"ChangeTableField": [{
+				"Company Phone": "555-550-5555"
+			}]
+		},
+		{
+			"ChangeSubscription": [
+				"Newsletter",
+				"Blog"
+			]
+		},
+		{
+			"ChangeTag": {
+				"Add": [
+					"Traffic",
+					"Lead",
+					"Sales",
+					"Retain"
+				],
+				"Remove": [
+					"Traffic",
+					"Lead",
+					"Sales",
+					"Retain"
+				]
+			}
+		},
+		{
+			"YesNo": [
+				"New Subscriber",
+				"Logged In"
+			]
+		},
+		{
+			"Case": ["Started Invoicing"]
+		},
+		{
+			"Split": [
+				"10%",
+				"20%",
+				"50%",
+				"100%"
+			]
+		},
+		{
+			"AbSplit": [
+				""
+			]
+		},
+		{
+			"Delay": [""]
+		},
+		{
+			"DelayUntil": [""]
+		},
+		{
+			"End": [""]
+		}
+	],
+	"Travel & Tourism": [{
+			"NewSubscription": [
+				"Vacation Purchase",
+				"Cruise Purchase",
+				"Hotel Purchase",
+				"Excursion Purchase",
+				"Newsletter"
+			]
+		},
+		{
+			"CampaignOpened": [
+				"Pre-Flight Deals",
+				"Asian in 30 Days",
+				"Black Friday Sales"
+			]
+		},
+		{
+			"LinkClicked": {
+				"link": "https://www.spades.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+				"title": "Spades"
+			}
+		},
+		{
+			"ProductPurchased": {
+				"link": "https://www.spades.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+				"title": "Preference Page"
+			}
+		},
+		{
+			"TotalRevenue": {
+				"title": 120000
+			}
+		},
+		{
+			"FormEvent": [
+				"Order Form",
+				"Billing Form",
+				"Subscription Form"
+			]
+		},
+		{
+			"ApiEvent": [
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?contact_id=12345",
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?email=homer@example.com",
+				"http://api.maropost.com/accounts/78/journeys/17227/trigger/20716510815520(.:format)?table=users&where[user_id]=123"
+			]
+		},
+		{
+			"SegmentEvent": [
+				"Vacationed in the last 120 days",
+				"Opened newsletter x3 in last month",
+				"Visited website x2 in last 30 days"
+			]
+		},
+		{
+			"ContactField": [
+				"account_id",
+				"account_name",
+				"business_name",
+				"company",
+				"create_date",
+				"current_provider",
+				"email",
+				"email_volume",
+				"first_name",
+				"free_trial",
+				"industry",
+				"job_title",
+				"last_name",
+				"lead_source",
+				"profession",
+				"rating",
+				"state"
+			]
+		},
+		{
+			"TableFieldUpdated": []
+		},
+		{
+			"SubscriptionChanged": [
+				"unsubscribed",
+				"Subscribed"
+			]
+		},
+		{
+			"TagEvent": [
+				"Vacation Purchased",
+				"Interests - All Inclusive",
+				"Interests - Road Trips"
+			]
+		},
+		{
+			"WebPageEvent": [{
+					"pageViews": {
+						"link": "https://www.spades.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+						"title": "Spades"
+					}
+				},
+				{
+					"linkClicks": {
+						"link": "https://www.spades.com/purchase?UTM:21as87sa0hgas08ya9yh90asj-au0jasj0a8y",
+						"title": "Spades"
+					}
+				},
+				{
+					"websites": [
+						"https://www.spades.com/",
+						"https://www.rentals.com/"
+					]
+				},
+				{
+					"funnels": [
+						"Booking Funnel",
+						"Abandoned"
+					]
+				}
+			]
+		},
+		{
+			"SendEmail": [{
+					"Name": "Spades Travel Rewards"
+				},
+				{
+					"Subject": "🌴 Sign up today for 5 Million points 🌴"
+				},
+				{
+					"Preheader": "Travel Rewards"
+				},
+				{
+					"From Name": "Spades.com"
+				},
+				{
+					"From Email": "travel@spades.com"
+				},
+				{
+					"Reply-To": "travel@spades.com"
+				},
+				{
+					"Brand": [
+						"Spades.com",
+						"Rentals.com"
+					]
+				},
+				{
+					"Content": "Spades Newsletter Day 1 - 7 Days to vacation \n Day 2 - 7 Days to vacation \n Day 3 - 7 Days to vacation"
+				},
+				{
+					"Preview Link": "✓"
+				},
+				{
+					"Address": "255 Collage Ave. Suite 189 Toronto, Ontario, Canada, M5H 3B7"
+				},
+				{
+					"Language": "English"
+				},
+				{
+					"Campaign Tags": [
+						"Cruise",
+						"Rewards",
+						"All-Inclusive",
+						"Welcome",
+						"Subscription",
+						"Blog",
+						"Newsletter"
+					]
+				},
+				{
+					"Secure Suppression List": [
+						"Full List",
+						"GDPR",
+						"Can Spam"
+					]
+				}
+			]
+		},
+		{
+			"SendMessage": [{
+					"Name": "Weekend Promotion"
+				},
+				{
+					"Message": "Breaking News"
+				}
+			]
+		},
+		{
+			"SendPushMessage": [
+				"Winter Promotion",
+				"Flash Sale"
+			]
+		},
+		{
+			"HttpPost": [{
+				"link": "https://www.spades.com/post.json",
+				"title": "Spades"
+			}]
+		},
+		{
+			"TriggerWorkflow": {
+				"checkboxes": [
+					"Re-Engagement Journey",
+					"Welcome Series",
+					"New Subscription"
+				],
+				"select": [
+					"New Subscription",
+					"Contact Field Updated",
+					"Segment Event",
+					"Form Event",
+					"Subscription Changed"
+				]
+			}
+		},
+		{
+			"SendToFacebook": {
+				"Mappings": [{
+						"FN": "Sarah"
+					},
+					{
+						"LN": "Pavan"
+					},
+					{
+						"GEN": ["F", "M"]
+					},
+					{
+						"CT": "Clearwater"
+					},
+					{
+						"ST": "FL"
+					},
+					{
+						"Country": "US"
+					},
+					{
+						"MADID": "6D92078A-8246-4BA4-AE5B-76104861E7DC"
+					},
+					{
+						"APPUID": "1015236885205290"
+					},
+					{
+						"DOB": 3271989
+					}
+				],
+				"Audience": [{
+						"Facebook Account": "Maropost Topper"
+					},
+					{
+						"Add Account": ""
+					}
+				]
+			}
+		},
+		{
+			"EndWorkflow": [
+				"Welcome Series",
+				"On-Boarding"
+			]
+		},
+		{
+			"ChangeContactField": [{
+				"Status": ["Traveling", "Not Traveling"]
+			}]
+		},
+		{
+			"ChangeTableField": [{
+				"Company Phone": "555-550-5555"
+			}]
+		},
+		{
+			"ChangeSubscription": [
+				"Newsletter",
+				"Blog"
+			]
+		},
+		{
+			"ChangeTag": {
+				"Add": [
+					"Traffic",
+					"Lead",
+					"Sales",
+					"Retain"
+				],
+				"Remove": [
+					"Traffic",
+					"Lead",
+					"Sales",
+					"Retain"
+				]
+			}
+		},
+		{
+			"YesNo": [
+				"New Subscriber",
+				"Logged In"
+			]
+		},
+		{
+			"Case": ["Started Invoicing"]
+		},
+		{
+			"Split": [
+				"10%",
+				"20%",
+				"50%",
+				"100%"
+			]
+		},
+		{
+			"AbSplit": [
+				""
+			]
+		},
+		{
+			"Delay": [""]
+		},
+		{
+			"DelayUntil": [""]
+		},
+		{
+			"End": [""]
+		}
+	]
+}]
