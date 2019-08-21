@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-position" v-bind:class="isClicked">
+  <div class="sidebar-position" v-bind:class="isClicked" v-if="JourneyEnd === false">
     <i class="fas" v-bind:class="active"></i>
     <input type="checkbox" name="handleClick" class="sidebar-button" v-model="checked" @click="handleClick" />
   </div>
