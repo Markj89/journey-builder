@@ -4,8 +4,9 @@
       <div class="row">
         <h1 class="bd-content-title blue-text"><strong>Contact Customer Success for Advice</strong></h1>
       </div>
-      <!--<div class="row">
-        <form id="support" @submit.prevent="submit" role="form">
+      <div class="row">
+        <iframe src="https://go.maropost.com/l/597851/2019-05-02/5wq1q" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>
+        <!--<form id="support" @submit.prevent="submit" role="form">
           <div class="first-user"  :class="{ 'form-group--error': $v.email_address.$error, 'form-group--loading': $v.email_address.$pending }">
             <label for="email" class="label">Business Email</label>
             <input type="email" name="email" id="email" v-model="$v.email_address.$model" class="form-control" :class="{'input': true, 'is-danger': $v.email_address.$invalid }" placeholder="Enter Your Email Address" novalidate>
@@ -33,8 +34,8 @@
               Sending...
             </b-alert>
           </div>
-        </form>
-      </div>-->
+        </form>-->
+      </div>
       <div class="row">
         <h3 class="sidebar-h3">More on how our journeys work</h3>
         <iframe width="560" height="250" src="https://www.youtube.com/embed/0x1FMpwzryE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

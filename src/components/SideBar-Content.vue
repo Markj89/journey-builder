@@ -22,6 +22,7 @@
           <b-alert :show="submitStatus === 'PENDING'" variant="primary" dismissible fade v-if="submitStatus === 'PENDING'">Sending...</b-alert>
         </div>
       </form>-->
+      <a href="#" name="button" class="btn submit btn-submit">Contact Support</a>
 
     <h3 class="bd-content-title"><strong>Or contact us directly!</strong></h3>
     <ul class="list-unstyled">
@@ -52,11 +53,17 @@ export default {
       submitStatus: null
     };
   },
+  props: {
+    chosenIndustry : {
+      type: String
+    }
+  },
   computed: {
     isRequired() {
       return true;
     }
   },
+  mounted() {},
   validations: {
     email_address: {
       email,
@@ -87,11 +94,22 @@ export default {
         const opts = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({email: this.email_address})
+          body: {
+            email: this.email_address,
+            //industry: this.
+          }
         };
 
         this.$store.dispatch('subscriptionData', opts).then((res) => {
           setTimeout(() => {
+            console.log(res);
+
+            this.$ga.event({
+              eventCategory: 'Subscribe',
+              eventAction: 'submit',
+              eventValue: opts
+            });
+
             this.submitStatus = 'OK';
           }, 500);
         }).catch((err) => {

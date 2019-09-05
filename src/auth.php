@@ -7,7 +7,8 @@
 * @param string the HTTP method, one of "GET", "POST"
 * @param url
 */
-class Pardot {
+
+class Pardot_Auth {
   require_once __DIR__ . './constants.php';
   private static $apiEmail = PARDOT_USER;
   private static $apiPswd = PARDOT_PWD;

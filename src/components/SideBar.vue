@@ -55,6 +55,9 @@ export default {
   props: {
     JourneyEnd : {
       type: Boolean
+    },
+    chosenIndustry : {
+      type: String
     }
   },
   mounted() {
@@ -64,11 +67,16 @@ export default {
   },
   computed: {
     open() {
+      if (this.$store.state.ui.sidebarOpen === true || this.JourneyEnd === true) {
+        return true;
+      }
       return this.$store.state.ui.sidebarOpen;
     }
   },
   watch: {
     open: function(open) {
+      console.log(this);
+
       const dX = open ? 0 : this.$el.offsetWidth
       TweenMax.to(this.$el, 0.2, {
         x: dX,

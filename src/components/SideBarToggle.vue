@@ -78,8 +78,6 @@ export default {
     JourneyEnd: {
       handler(val) {
         this.JourneyEnd = val;
-        console.log(this.JourneyEnd);
-
         if (this.JourneyEnd === true) {
           this.$store.dispatch('toggleSidebar');
 

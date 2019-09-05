@@ -53,7 +53,7 @@ export default {
       currentNumber: 0,
       industries: [
         "Publishing",
-        "Eccomerce",
+        "Ecommerce",
         "Health & Wellness",
         "Travel & Tourism"
       ],

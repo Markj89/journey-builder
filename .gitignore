@@ -1,10 +1,12 @@
 .DS_Store
 node_modules
 /dist
-/src/auth.php
-/src/constants.php
 server
 .npmrc
+/src/api.php
+/src/auth.php
+/src/constants.php
+
 
 # local env files
 .env.local
@@ -26,5 +28,3 @@ yarn-error.log*
 
 # Unused files & Folders
 /src/APIService.js
-/src/app.js
-/src/components/DoubleFlowChartLink.vue

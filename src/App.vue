@@ -1,8 +1,8 @@
 <template>
   <div id="app" v-bind:class="{'sidebar-background': JourneyEnd === true }">
     <tutorial v-if="showTutorialModal" @closeTutorialModal="showTutorialModal = false" v-on:setContent="onChildClick"></tutorial>
-    <simple-flowchart :diagram.sync="diagram" @nodeClick="nodeClick" @nodeDelete="nodeDelete" @linkBreak="linkBreak" @linkAdded="linkAdded" @canvasClick="canvasClick" :height="100" :modalData="modalData" />
-    <sidebar v-bind:JourneyEnd="JourneyEnd"></sidebar>
+    <simple-flowchart v-bind:class="{'times_up': JourneyEnd === true }" :diagram.sync="diagram" @nodeClick="nodeClick" @nodeDelete="nodeDelete" @linkBreak="linkBreak" @linkAdded="linkAdded" @canvasClick="canvasClick" :height="100" :modalData="modalData" />
+    <sidebar v-bind:JourneyEnd="JourneyEnd === true"></sidebar>
 
     <aside id="side_panel" class="sidebar draggable" v-bind:class="{'disable_sidebar disabled': JourneyEnd === true }">
       <div class="workflow_menu_block">
@@ -15,9 +15,9 @@
         </div>
       </div>
     </aside>
+
   </div>
 </template>
-
 <script>
 
 // Layouts
@@ -143,6 +143,9 @@ export default {
     ])
   },
   methods: {
+    track () {
+      this.$ga.page('/')
+    },
     onChildClick(val) {
       const industryData = Object.keys(this.dummyData).map(key => {
         let items, list;

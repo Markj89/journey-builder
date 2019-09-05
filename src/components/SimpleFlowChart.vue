@@ -10,7 +10,7 @@
     </flowchart-link>
   </svg>
 
-  <flowchart-modal v-if="showModal && modal === `${node.modal}`" v-for="(node, index) in diagram.nodes" :key="`node${node.id}`" v-bind.sync="node" @openModal="showModal" :modalContent="modalContent" @closeModal="showModal = false">
+  <flowchart-modal v-if="showModal && modal === `${node.modal}`" v-for="(node, index) in diagram.nodes" :key="`node${node.id}`" :ref="`modal${node.id}`" v-bind.sync="node" @openModal="showModal" :modalContent="modalContent" @closeModal="showModal = false">
   </flowchart-modal>
   <flowchart-node v-bind.sync="node" v-for="(node, index) in diagram.nodes" :key="`node${node.id}` + 1" :ref="`node${node.id}`" v-bind:class="`workflow_${node.type}`" :options="nodeOptions" @linkingStart="linkingStart(node.id)"
     @linkingStop="linkingStop(node.id)" @nodeSelected="nodeSelected(node.id, $event)" v-on:getModalData="filterModalData">
@@ -204,6 +204,7 @@ export default {
      *  Set position of lines
     */
     getPortPosition(type, x, y) {
+      let i = 1;
       if (type === 'top') {
         return [x + 20 / 4, y + 45];
       } else if (type === 'bottom') {
@@ -350,6 +351,8 @@ export default {
     position: relative;
     svg {
         cursor: grab;
+        position: relative;
+        z-index: 0;
     }
 }
 </style>

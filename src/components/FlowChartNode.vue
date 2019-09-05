@@ -5,8 +5,21 @@
       <div class="icon" v-bind:style="{ 'background-image': 'url(' + icon + ')' }"></div>
       <h1 v-text="label" class="title node-label"></h1>
     </div>
-    <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay' || `${label}` === 'A/B Split' || `${label}` === 'Yes/No'"></div>
+    <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay'"></div>
     <div v-show="show.delete" class="node-delete">&times;</div>
+
+    <svg id="doubleLine" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" v-if="`${label}` === '% Split' || `${label}` === 'Yes/No'">
+      <g>
+        <!--<div class="node-port node-output node-dbl-output-one" @mousedown="outputMouseDown"></div>-->
+        <g>
+          <path d="M 194, 225 L 294, 225, 321, 275, 421, 275" style="stroke: rgb(2, 2, 2);stroke-width: 2.73205;fill: none;"></path>
+        </g>
+        <g>
+          <path d="M 194, 225 L 294, 225, 320, 175, 420, 175" style="stroke: rgb(2, 2, 2); stroke-width: 2.73205; fill: none;"></path>
+          <!--<div class="node-port node-output node-dbl-output-two" @mousedown="outputMouseDown"></div>-->
+        </g>
+      </g>
+    </svg>
   </div>
 </template>
 
@@ -154,7 +167,7 @@ $white: #fff;
     cursor: pointer;
     position: absolute;
     left: #{-5+-170/-2}px;
-    top: 0px;
+    top: 15px;
   }
   .node-dbl-output-one {
     top: #{-2+12/-2}px;

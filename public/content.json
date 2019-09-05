@@ -301,9 +301,7 @@
 			]
 		},
 		{
-			"AbSplit": [
-				""
-			]
+			"AbSplit": [""]
 		},
 		{
 			"Delay": [""]
@@ -315,8 +313,7 @@
 			"End": [""]
 		}
 	],
-
-	"Eccommerce": [{
+	"Ecommerce": [{
 			"NewSubscription": [
 				"Promotions",
 				"Paid Customer",

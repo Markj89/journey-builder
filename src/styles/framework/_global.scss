@@ -81,6 +81,10 @@ p, span {
 	cursor: default;
 	text-decoration: none;
 }
+.times_up {
+	pointer-events: none;
+	opacity: 0.8;
+}
 
 // LINKS
 a {

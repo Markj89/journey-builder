@@ -32,8 +32,8 @@ export default new Vuex.Store({
   },
   actions: {
     async subscriptionData({ commit }, opts) {
-      return axios.post('/api.php', opts).then((res) => {
-        commit('SOME_MUTATION', response.data);
+      return axios.post('src/auth.php', opts).then((res) => {
+        commit('SOME_MUTATION', res.data);
       })
     },
     async getDummyData( { commit } ) {
