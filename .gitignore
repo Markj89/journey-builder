@@ -2,11 +2,8 @@
 node_modules
 /dist
 server
+public/assets
 .npmrc
-/src/api.php
-/src/auth.php
-/src/constants.php
-
 
 # local env files
 .env.local

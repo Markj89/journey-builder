@@ -4,25 +4,27 @@
 
     <p>Most marketing teams are using a multi-channel strategy, leveraging two or more of these channels, but not focusing on creating consistent messaging from one to the next.</p>
     <p>Effective cross-channel engagement is possible; understanding your customers and using that understanding to create meaningful journeys is the first step, followed by getting the right tools in place.
-      <a href="https://www.maropost.com/" class="link">Maropost</a> automates marketing processes, leveraging data to maximize efficiency across the journey and provide a personal experience for every customer.</p>
+    <a href="https://www.maropost.com/" class="link">Maropost</a> automates marketing processes, leveraging data to maximize efficiency across the journey and provide a personal experience for every customer.</p>
 
-      <!--<form id="subscribe" @submit.prevent="submit" role="form">
-        <div class="first-user" :class="{ 'form-group--error': $v.email_address.$error, 'form-group--loading': $v.email_address.$pending }">
-          <label for="email" class="label">Business Email</label>
-          <input type="email" name="email" id="email" v-model="$v.email_address.$model" class="form-control" :class="{'input': true, 'is-danger': $v.email_address.$invalid }" placeholder="Enter Your Email to Subscribe" novalidate>
-          <b-alert variant="danger" fade v-if="!$v.email_address.required" :show="!$v.email_address.required">
-            Your Business Email is required
-          </b-alert>
-          <b-alert variant="danger" fade v-if="!$v.email_address.$email" :show="$v.email_address.$invalid">Please provide a proper email!</b-alert>
-        </div>
-        <div class="first-user">
-          <button class="btn submit btn-submit" type="submit" :disabled="submitStatus === 'PENDING'">Subscribe</button>
-          <b-alert :show="submitStatus === 'OK'" variant="success" dismissible fade v-if="submitStatus === 'OK'">Thanks for your submission!</b-alert>
-          <b-alert :show="submitStatus === 'ERROR'" variant="danger" dismissible fade v-if="submitStatus === 'ERROR'">Please Fill Out All Fields Above.</b-alert>
-          <b-alert :show="submitStatus === 'PENDING'" variant="primary" dismissible fade v-if="submitStatus === 'PENDING'">Sending...</b-alert>
-        </div>
-      </form>-->
-      <a href="#" name="button" class="btn submit btn-submit">Contact Support</a>
+
+    <form id="subscribe" method="" @submit.prevent="submit" role="form">
+      <div class="first-user" :class="{ 'form-group--error': $v.email_address.$error, 'form-group--loading': $v.email_address.$pending }">
+        <label for="email" class="label">Business Email</label>
+        <input type="email" name="email" id="email" v-model="$v.email_address.$model" class="form-control" :class="{'input': true, 'is-danger': $v.email_address.$invalid }" placeholder="Enter Your Email to Subscribe" novalidate>
+        <b-alert variant="danger" fade v-if="!$v.email_address.required" :show="!$v.email_address.required">
+          Your Business Email is required
+        </b-alert>
+        <b-alert variant="danger" fade v-if="!$v.email_address.$email" :show="$v.email_address.$invalid">Please provide a proper email!</b-alert>
+      </div>
+      <div class="first-user">
+        <button class="btn submit btn-submit" type="submit" :disabled="submitStatus === 'PENDING'">Subscribe</button>
+        <b-alert :show="submitStatus === 'OK'" variant="success" dismissible fade v-if="submitStatus === 'OK'">Thanks for your submission!</b-alert>
+        <b-alert :show="submitStatus === 'ERROR'" variant="danger" dismissible fade v-if="submitStatus === 'ERROR'">Please Fill Out All Fields Above.</b-alert>
+        <b-alert :show="submitStatus === 'PENDING'" variant="primary" dismissible fade v-if="submitStatus === 'PENDING'">Sending...</b-alert>
+      </div>
+    </form>
+
+    <button href="#" name="button" class="btn-secondary btn_maropost submit btn-submit">Contact Support</button>
 
     <h3 class="bd-content-title"><strong>Or contact us directly!</strong></h3>
     <ul class="list-unstyled">
@@ -40,6 +42,8 @@
   }
 </style>
 <script>
+import axios from 'axios';
+
 import { required, email } from 'vuelidate/lib/validators';
 import { mapState, mapGetters, mapActions } from 'vuex';
 
@@ -93,7 +97,9 @@ export default {
         this.submitStatus = 'PENDING';
         const opts = {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Access-Control-Allow-Origin': '*' },
+          crossdomain: true,
+          useCredentails: true,
           body: {
             email: this.email_address,
             //industry: this.
@@ -115,6 +121,7 @@ export default {
         }).catch((err) => {
           this.submitStatus = 'ERROR';
         });
+
       }
     }
   }

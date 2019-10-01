@@ -579,7 +579,7 @@
           </div>
         </div>
         <div class="modal-footer modal_buttons">
-          <b-button type="submit" class="submit save btn" v-on:click.stop="close" aria-label="Close">Save</b-button>
+          <b-button type="submit" class="save" pill v-on:click.stop="close" aria-label="Close">Save</b-button>
         </div>
       </div>
     </div>

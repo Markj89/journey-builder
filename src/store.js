@@ -5,6 +5,7 @@ import ui from './ux/ui';
 
 //const BASE_URL = 'http://localhost:3000/'; MongoDB
 const BASE_URL = './content.json'; // Basic Dummy Data
+const API = './auth.php'; // Post to Pardot
 
 Vue.use(Vuex, axios);
 const debug = process.env.NODE_ENV !== 'production';
@@ -16,7 +17,7 @@ export default new Vuex.Store({
   },
   debug: true,
   state: {
-    dummyData:[],
+    dummyData: [],
     someGlobalState: null,
   },
   mutations: {
@@ -32,9 +33,9 @@ export default new Vuex.Store({
   },
   actions: {
     async subscriptionData({ commit }, opts) {
-      return axios.post('src/auth.php', opts).then((res) => {
-        commit('SOME_MUTATION', res.data);
-      })
+      return axios.post(`${API}`, opts).then((res) => {
+        commit('POST_MUTATION', res.data);
+      });
     },
     async getDummyData( { commit } ) {
       axios.get(`${BASE_URL}`, {
@@ -55,6 +56,6 @@ export default new Vuex.Store({
         }
         console.log(error.config);
       });
-    }
+    },
   },
 })

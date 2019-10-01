@@ -6,8 +6,12 @@
       <div class="row flex-xl-nowrap">
         <div class="col-12 col-md-12 col-xl-12 bd-sidebar">
           <div class="bd-content">
-            <sidebar-content v-if="toggle === false"></sidebar-content>
-            <sidebar-form v-if="toggle === true"></sidebar-form>
+            <keep-alive>
+              <sidebar-content v-if="toggle === false"></sidebar-content>
+            </keep-alive>
+            <keep-alive>
+              <sidebar-form v-if="toggle === true"></sidebar-form>
+            </keep-alive>
           </div>
         </div>
       </div>

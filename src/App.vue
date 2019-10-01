@@ -1,6 +1,7 @@
 <template>
   <div id="app" v-bind:class="{'sidebar-background': JourneyEnd === true }">
-    <tutorial v-if="showTutorialModal" @closeTutorialModal="showTutorialModal = false" v-on:setContent="onChildClick"></tutorial>
+    <tutorial v-if="showTutorialModal" @closeTutorialModal="showTutorialModal = false" v-on:setContent="onChildClick" v-on:setIndustry="getIndustry"></tutorial>
+
     <simple-flowchart v-bind:class="{'times_up': JourneyEnd === true }" :diagram.sync="diagram" @nodeClick="nodeClick" @nodeDelete="nodeDelete" @linkBreak="linkBreak" @linkAdded="linkAdded" @canvasClick="canvasClick" :height="100" :modalData="modalData" />
     <sidebar v-bind:JourneyEnd="JourneyEnd === true"></sidebar>
 
@@ -124,7 +125,7 @@ export default {
     };
   },
   mounted() {
-    this.startTimer();
+    //this.startTimer();
   },
   beforeMount() {
     this.$store.dispatch('getDummyData');
@@ -155,6 +156,9 @@ export default {
         }
       });
       this.modalData.push(industryData);
+    },
+    getIndustry(value) {
+      this.chosenIndustry = value;
     },
     startTimer() {
       this.timer = setInterval(() => this.countdown(), 1000);
@@ -205,8 +209,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
-@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap");
 @import 'styles/app.scss';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

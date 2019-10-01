@@ -2,13 +2,14 @@ const path = require('path');
 
 module.exports = {
   publicPath: './',
+  assetsDir: 'server',
   devServer: {
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
     proxy: {
-      '^/api/': {
-        target: 'http://localhost:8080/',
+      '^/server/': {
+        target: 'http://localhost:3000/',
         changeOrigin: true
       }
     }

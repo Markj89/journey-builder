@@ -2,35 +2,39 @@
   <div class="vue-modal-mask" name="fade">
     <div class="vue-modal-tutorial" tabindex="-1" role="dialog">
       <div class="vue-modal-dialog">
-        <div class="vue-modal-content">
+        <div class="vue-modal-content" id="1" v-if="tabNumber === 1">
           <div class="vue-modal-header">
             <h1 class="vue-modal-title">Welcome to our Journey Builder Demo!</h1>
           </div>
           <div class="vue-modal-body">
-            <p class="vue-modal-paragraph">Pick your industry and watch a quick video on how to get started.</p>
+            <p class="vue-modal-paragraph">Here is a quick video to get you started with the basics.</p>
+
+            <div class="tutorial-video">
+              <b-embed type="iframe" aspect="16by9" src="https://www.youtube.com/embed/6a-SYDN9-tg" allowfullscreen></b-embed>
+            </div>
+            <div class="vue-modal-footer modal_buttons" name="fade">
+              <button class="btn-white right" @click="next">Next</button>
+            </div>
+          </div>
+        </div>
+        <div class="vue-modal-content" id="2" v-if="tabNumber === 2">
+          <div class="vue-modal-header">
+            <h1 class="vue-modal-title">Time for the good stuff…</h1>
+          </div>
+          <div class="vue-modal-body">
+            <p class="vue-modal-paragraph">Now that you have the basics down, pick your industry and we will show an example that benefit you and your customers.</p>
             <div class="vue-modal-industry">
               <div class="industry-list" v-for="industry in industries">
-                <button class="industry-button" :aria-label="`${industry}`" v-on:click.once="emitToParent(`${industry}`)" name="fade" v-if="!hide">{{industry}}</button>
+                <button class="industry-button" :aria-label="`${industry}`" v-on:click="whichIndustry(`${industry}`)" name="fade">{{industry}}</button>
               </div>
             </div>
-            <!--<div class="image-slider" tag="div">
-              <transition-group name="fade" tag="div">
-                <div v-for="number in [currentNumber]" :key="number">
-                  <img :src="currentImage" :alt="alt" />
-                </div>
-              </transition-group>
-            </div>
-            <div class="vue-modal-footer modal_buttons">
-              <a @click="prev" v-if="currentNumber !== 0" href='#'>Previous</a> || <a @click="next" v-if="currentNumber !== 2" href='#'>Next</a>
-            </div>
-            <div class="vue-modal-footer modal_buttons" name="fade">
-              <button class="btn_maropost" v-if="currentNumber === 2" v-on:click.stop="close" aria-label="Close">Lets Do This...</button>
-            </div>-->
+
             <div class="tutorial-video">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/6a-SYDN9-tg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <b-embed type="iframe" aspect="16by9" :src="emitVideoOfIndustry" allowfullscreen></b-embed>
             </div>
             <div class="vue-modal-footer modal_buttons" name="fade">
-              <button class="btn_maropost" v-on:click.stop="close" v-if="hide" name="fade" aria-label="Close">Lets Do This...</button>
+              <button class="btn-white left" @click="prev">Previous</button>
+              <button class="btn_maropost right" v-on:click.stop="close" v-on:click="emitToParent(`${chosenIndustry}`)" v-if="hide" name="fade" aria-label="Close">Lets Do This!</button>
             </div>
           </div>
         </div>
@@ -44,11 +48,6 @@ export default {
   name: 'Tutorial',
   data() {
     return {
-      images: [
-        'https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png',
-        'https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.06.20-PM.png',
-        'https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.06.33-PM.png'
-      ],
       alt: 'Journey Builder',
       currentNumber: 0,
       industries: [
@@ -57,22 +56,37 @@ export default {
         "Health & Wellness",
         "Travel & Tourism"
       ],
-      industry: '',
-      hide: false
+      industryVideo: [
+        { "Publishing" : "https://www.youtube.com/embed/EDUl83iRSpI" }, // Under the Hood: Landing Pages
+        { "Ecommerce" : "https://www.youtube.com/embed/G7AJ9f-bY68" },  // Under the Hood: Content Hoods
+        { "Health & Wellness" : "https://www.youtube.com/embed/ih0yhgY8fck" }, // Under the Hood: Pull from URL
+        { "Travel & Tourism" : "https://www.youtube.com/embed/oryIIzuNfgY" } // Under the Hood: Priority Send
+      ],
+      chosenIndustry: '',
+      industryData: '',
+      hide: false,
+      tabNumber: 1,
+      video: ""
     };
   },
-  props: {
-    showTutorialModal: Boolean,
-    chosenIndustry: String
-  },
   methods: {
-    //next() { this.currentNumber += 1; },
-    //prev() { this.currentNumber -= 1; },
+    next() {
+      this.tabNumber++;
+    },
+    prev() {
+      this.tabNumber--;
+    },
+    whichIndustry(industry) {
+      if (typeof industry !== "undefined") {
+        this.chosenIndustry = industry;
+        this.$emit('setIndustry', this.chosenIndustry);
+        this.hide = true;
+      }
+    },
     emitToParent(data) {
       if (typeof data !== "undefined") {
-        this.industry = data;
-        this.$emit('setContent', this.industry);
-        this.hide = !this.hide;
+        this.industryData = data;
+        this.$emit('setContent', this.industryData);
       }
     },
     close() {
@@ -81,8 +95,19 @@ export default {
     }
   },
   computed: {
-    currentImage() {
-      return this.images[Math.abs(this.currentNumber) % this.images.length];
+    emitVideoOfIndustry() {
+      this.video = "https://www.youtube.com/embed/6a-SYDN9-tg"; // Default
+
+      for (let i = 0; i < this.industryVideo.length; i++) {
+        let industries = this.industryVideo[i];
+        for (let segment in industries) {
+          if ( industries.hasOwnProperty(this.chosenIndustry) ) {
+            this.video = industries[segment];
+          }
+        }
+      }
+
+      return this.video;
     }
   }
 }
@@ -92,10 +117,12 @@ export default {
   $maropost_blue: #03B6FC;
   .vue-modal-tutorial {
   	background-color: #fff;
-    width: 735px;
+    width: 720px;
     border-radius: 8px;
-    border: 1px solid rgba(254, 254, 254, .5);
-  	padding: 15px 25px;
+    -webkit-box-shadow: 0px 6px 20px #00000026;
+    -moz-box-shadow: 0px 6px 20px #00000026;
+    box-shadow: 0px 6px 20px #00000026;
+  	padding: 45px 25px;
   	margin: 0 auto;
   	display: table;
   	position: absolute;
@@ -122,8 +149,14 @@ export default {
           height: 400px;
           position: relative;
         }
+        .tutorial-video {
+          margin-bottom: 15px;
+        }
         .vue-modal-paragraph {
           margin: 1rem 0;
+          font-size: 16px;
+          color: #525252;
+          font-family: $open_sans 'Semibold', sans-serif;
         }
         .vue-modal-industry {
           margin: 10px;
@@ -143,9 +176,8 @@ export default {
               -moz-box-shadow: 0 3px 20px rgba(0,0,0,0.16);
               box-shadow: 0 3px 20px rgba(0,0,0,0.16);
               &:hover {
-                background-color: $maropost_blue;
+                background-color: #3B3B3B;
                 color: #fff;
-                border: 2px solid #fff;
               }
             }
           }

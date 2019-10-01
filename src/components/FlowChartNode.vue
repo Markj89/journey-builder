@@ -1,37 +1,39 @@
 <template>
-  <div class="flowchart-node dragme" :ref="`${type}`" :style="nodeStyle" @mousedown="handleMousedown" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" v-on:dblclick="modalClick(modal)" v-bind:class="{selected: options.selected === id}">
-    <div class="node-port node-input" @mousedown="inputMouseDown" @mouseup="inputMouseUp" v-if="`${type}` === 'filter' || `${type}` === 'action' || `${type}` === 'delay' || `${type}` === 'end'"></div>
-    <div class="node-main">
-      <div class="icon" v-bind:style="{ 'background-image': 'url(' + icon + ')' }"></div>
-      <h1 v-text="label" class="title node-label"></h1>
+    <div class="flowchart-node dragme" v-if="`${type}` === 'trigger' || `${type}` === 'action' || `${type}` === 'delay' || `${type}` === 'end'" :ref="`${type}`" :style="nodeStyle" @mousedown="handleMousedown" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" v-on:dblclick="modalClick(modal)" v-bind:class="{selected: options.selected === id}">
+      <div class="node-port node-input" @mousedown="inputMouseDown" @mouseup="inputMouseUp" v-if="`${type}` === 'filter' || `${type}` === 'action' || `${type}` === 'delay' || `${type}` === 'end'"></div>
+      <div class="node-main">
+        <div class="icon" v-bind:style="{ 'background-image': 'url(' + icon + ')' }"></div>
+        <h1 v-text="label" class="title node-label"></h1>
+      </div>
+      <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay'"></div>
+      <div v-show="show.delete" class="node-delete">&times;</div>
     </div>
-    <div class="node-port node-output" @mousedown="outputMouseDown" v-if="`${type}` === 'action' ||`${type}` === 'trigger' || `${type}` === 'delay'"></div>
-    <div v-show="show.delete" class="node-delete">&times;</div>
 
-    <svg id="doubleLine" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" v-if="`${label}` === '% Split' || `${label}` === 'Yes/No'">
-      <g>
-        <!--<div class="node-port node-output node-dbl-output-one" @mousedown="outputMouseDown"></div>-->
+    <div class="flowchart-node dragme" v-else="`${type}` === 'filter'" :style="nodeStyle" @mousedown="handleMousedown" @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" v-on:dblclick="modalClick(modal)" v-bind:class="{selected: options.selected === id}">
+      <div class="node-port node-input" @mousedown="inputMouseDown" @mouseup="inputMouseUp" v-if="`${type}` === 'filter' || `${type}` === 'action' || `${type}` === 'delay' || `${type}` === 'end'"></div>
+      <div class="node-main">
+        <div class="icon" v-bind:style="{ 'background-image': 'url(' + icon + ')' }"></div>
+        <h1 v-text="label" class="title node-label"></h1>
+      </div>
+      <div v-show="show.delete" class="node-delete">&times;</div>
+      <svg id="doubleLine" width="100%" x="200" y="200" cx="50" cy="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
         <g>
-          <path d="M 194, 225 L 294, 225, 321, 275, 421, 275" style="stroke: rgb(2, 2, 2);stroke-width: 2.73205;fill: none;"></path>
+          <g>
+            <path d="M 260, 225 L 294, 225, 321, 275, 350, 275" style="stroke: rgb(2, 2, 2); stroke-width: 2.73205;fill: none;"></path>
+          </g>
+          <g>
+            <path d="M 260, 225 L 294, 225, 320, 175, 350, 175" style="stroke: rgb(2, 2, 2); stroke-width: 2.73205; fill: none;"></path>
+          </g>
         </g>
-        <g>
-          <path d="M 194, 225 L 294, 225, 320, 175, 420, 175" style="stroke: rgb(2, 2, 2); stroke-width: 2.73205; fill: none;"></path>
-          <!--<div class="node-port node-output node-dbl-output-two" @mousedown="outputMouseDown"></div>-->
-        </g>
-      </g>
-    </svg>
-  </div>
+      </svg>
+    </div>
 </template>
 
 <script>
 import EventBus from './../ux/eventBus';
-import FlowChartDoubleLink from './FlowChartDoubleLink.vue';
 
 export default {
   name: 'FlowChartNode',
-  components: {
-    'flowchart-double-link': FlowChartDoubleLink
-  },
   props: {
     id: {
       type: Number,
@@ -166,8 +168,16 @@ $white: #fff;
   #doubleLine {
     cursor: pointer;
     position: absolute;
-    left: #{-5+-170/-2}px;
-    top: 15px;
+    top: 0px;
+    right: 0px;
+    float: right;
+    height: 100%;
+    width: 100%;
+    display: block;
+    clear: both;
+    overflow: visible;
+    transform: translate(-180px, -181px);
+    z-index: 10;
   }
   .node-dbl-output-one {
     top: #{-2+12/-2}px;
