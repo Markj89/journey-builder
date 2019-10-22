@@ -5,8 +5,7 @@ A demo version of the Maropost Journey Builder for the sales team to present in 
  - Open Node to Modal
  - Delete Link
 
-![Screenshot](https://www.maropost.com/wp-content/uploads/2019/07/Screen-Shot-2019-07-01-at-4.05.33-PM.png)
-[Live Version](https://journeybuilder.maropost.com/)
+![Screenshot](https://photos.app.goo.gl/NjCJ1L4RgjLjBqCs5)
 
 ## Prerequisites
 - [Vue Dev Tools](https://github.com/vuejs/vue-devtools)
@@ -52,7 +51,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ### Authors
-Marcus Jackson - marcus@maropost.com
+Marcus Jackson - marcusj98@gmail.com
 
 ### License
 N/A

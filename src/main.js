@@ -13,7 +13,7 @@ Vue.use(Vuelidate);
 Vue.use(VueMeta);
 
 Vue.use(VueAnalytics, {
-  id: 'UA-53205775-1',
+  id: '', // Add GTAG
   //sendHitTask: process.env.NODE_ENV === 'production',
   autoTracking: {
     screenview: true
