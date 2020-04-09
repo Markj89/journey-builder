@@ -9,7 +9,7 @@
       <div class="workflow_menu_block">
         <div class="workflow_menu_row">
           <ul>
-            <li class="sidebar-modal" v-for="(key, item) in scene.nodes" v-bind:class="`${key.category}`">
+            <li class="sidebar-modal" v-for="(key, item) in scene.nodes" v-bind:key="`${item}`" v-bind:class="`${key.category}`">
               <a href="#" v-on:click.stop.prevent="addNode(key)" v-model="key.value" :value="key.value" class="sidebar-modal-link" v-bind:class="{'disabled': JourneyEnd === true }">{{ key.text }}</a>
             </li>
           </ul>
@@ -189,28 +189,16 @@ export default {
     closeTutorialModal() {
       this.showTutorialModal = !this.showTutorialModal;
     },
-    nodeClick(id) {
-      console.log('node click', id);
-    },
-    nodeDelete(id) {
-      console.log('node delete', id);
-    },
-    linkBreak(id) {
-      console.log('link break', id);
-    },
-    linkAdded(link) {
-      console.log('new link added:', link);
-    },
-    canvasClick(e) {
-      console.log('canvas Click, event:', e);
-    }
+    nodeClick(id) {},
+    nodeDelete(id) {},
+    linkBreak(id) {},
+    linkAdded(link) {},
+    canvasClick(e) {}
   }
 }
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap");
 @import 'styles/app.scss';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

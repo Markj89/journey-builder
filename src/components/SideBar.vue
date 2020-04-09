@@ -79,8 +79,6 @@ export default {
   },
   watch: {
     open: function(open) {
-      console.log(this);
-
       const dX = open ? 0 : this.$el.offsetWidth
       TweenMax.to(this.$el, 0.2, {
         x: dX,

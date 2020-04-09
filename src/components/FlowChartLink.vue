@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import EventBus from './../ux/eventBus';
 export default {
   name: 'FlowChartLink',
   props: {

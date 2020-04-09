@@ -5,7 +5,6 @@ import ui from './ux/ui';
 
 //const BASE_URL = 'http://localhost:3000/'; MongoDB
 const BASE_URL = './content.json'; // Basic Dummy Data
-const API = './auth.php'; // Post to Pardot
 
 Vue.use(Vuex, axios);
 const debug = process.env.NODE_ENV !== 'production';
@@ -49,12 +48,7 @@ export default new Vuex.Store({
       }).catch(function(error) {
         if (error.response) {
           console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log(error.message);
         }
-        console.log(error.config);
       });
     },
   },

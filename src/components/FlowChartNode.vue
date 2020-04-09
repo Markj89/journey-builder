@@ -104,11 +104,12 @@ export default {
       this.$emit('getModalData', val);
     },
     handleMousedown(e) {
+      e.preventDefault();
+
       const target = e.target || e.srcElement;
       if (target.className.indexOf('node-input') < 0 && target.className.indexOf('node-output') < 0) {
         this.$emit('nodeSelected', e);
       }
-      e.preventDefault();
     },
     handleMouseOver() {
       this.show.delete = true;

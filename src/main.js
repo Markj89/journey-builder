@@ -14,7 +14,7 @@ Vue.use(VueMeta);
 
 Vue.use(VueAnalytics, {
   id: '', // Add GTAG
-  //sendHitTask: process.env.NODE_ENV === 'production',
+  sendHitTask: process.env.NODE_ENV === 'production',
   autoTracking: {
     screenview: true
   },
