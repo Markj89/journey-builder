@@ -42,11 +42,6 @@
   }
 </style>
 <script>
-import axios from 'axios';
-
-import { required, email } from 'vuelidate/lib/validators';
-import { mapState, mapGetters, mapActions } from 'vuex';
-
 export default {
   name: 'SideBar-Content',
   data() {
@@ -70,14 +65,13 @@ export default {
   mounted() {},
   validations: {
     email_address: {
-      email,
       required: true,
       async isUnique(value) {
         // standalone validator ideally should not assume a field is required
         if (value === '') return true
 
         // simulate async call, fail for all logins with even length
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           setTimeout(() => {
             resolve(typeof value === 'string' && value.length % 2 !== 0)
           }, 350 + Math.random() * 300)
@@ -90,7 +84,7 @@ export default {
       this.$v.$touch();
 
       if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR';
+        this.submitStatus = 'ERROR' + err;
       } else {
 
         // Do your submit logic here
@@ -102,14 +96,11 @@ export default {
           useCredentails: true,
           body: {
             email: this.email_address,
-            //industry: this.
           }
         };
 
         this.$store.dispatch('subscriptionData', opts).then((res) => {
           setTimeout(() => {
-            console.log(res);
-
             this.$ga.event({
               eventCategory: 'Subscribe',
               eventAction: 'submit',

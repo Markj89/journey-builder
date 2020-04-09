@@ -2,6 +2,11 @@
  *  @author Marcus Jackson
  */
 
+
+ // FONTAWESOME
+ $fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
+ @import '../../node_modules/@fortawesome/fontawesome-pro/scss/fontawesome';
+
 @import "variables";
 @import "base/mixins";
 @import "framework/layout";
@@ -16,7 +21,3 @@
 // BOOTSTRAP
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import '../../node_modules/bootstrap-vue/src/index.scss';
-
-// FONTAWESOME
-$fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
-@import '../../node_modules/@fortawesome/fontawesome-pro/scss/fontawesome';

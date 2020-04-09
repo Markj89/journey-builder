@@ -55,8 +55,6 @@
 </style>
 
 <script>
-import { TweenMax, Power3 } from 'gsap';
-
 export default {
   name: 'Sidebar-Toggle',
   data() {
