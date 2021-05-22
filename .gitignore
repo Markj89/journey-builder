@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-public/assets
+public
+!public/content.json
 .npmrc
 
 # local env files
@@ -12,6 +13,9 @@ public/assets
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#lock
+package-lock.json
 
 # Editor directories and files
 .idea
